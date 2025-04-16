@@ -273,7 +273,8 @@ def handle_new_message(message):
             resposta = responder_com_maritaca(
                 st.session_state.texto_extraido, 
                 st.session_state.objetivo_final, 
-                message
+                message,
+                st.session_state.chat_history  # Passando o histórico da conversa
             )
             st.session_state.chat_history.append({"pergunta": message, "resposta": resposta})
         st.session_state.app_state = "chat"
@@ -444,16 +445,11 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
         st.markdown(f"<div class='card'><b>Você:</b> {chat['pergunta']}</div>", unsafe_allow_html=True)
         st.markdown(f"<div class='card'><b>Lucid:</b> {chat['resposta']}</div>", unsafe_allow_html=True)
     
-    # Form para nova mensagem
-    with st.form("chat_form", clear_on_submit=True):
-        col1, col2 = st.columns([4, 1])
-        with col1:
-            message = st.text_input("", placeholder="Escreva sua pergunta sobre o conteúdo...", label_visibility="collapsed", key="message_input")
-        with col2:
-            submitted = st.form_submit_button("Enviar", use_container_width=True)
-            
-        if submitted and message:
-            handle_new_message(message)
+    # Input de mensagem simples
+    message = st.text_input("", placeholder="Escreva sua pergunta sobre o conteúdo...", label_visibility="collapsed", key="message_input")
+
+    if message:
+        handle_new_message(message)
     
     if st.button("⬅️ Voltar ao início", use_container_width=True):
         change_state("inicio")
