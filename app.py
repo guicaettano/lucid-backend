@@ -181,7 +181,7 @@ if "faqs_gerados" not in st.session_state:
 # Função para navegar entre estados
 def change_state(new_state):
     st.session_state.app_state = new_state
-    st.experimental_rerun()
+    st.rerun()
 
 # Função para definir o método de entrada
 def handle_upload_click():
@@ -195,14 +195,16 @@ def handle_file_upload(uploaded_file):
     with st.spinner("📖 Extraindo conteúdo..."):
         st.session_state.texto_extraido = process_file(uploaded_file)
         st.session_state.file_name = uploaded_file.name
-        change_state("objective")
+        st.session_state.app_state = "objective"
+        st.rerun()
 
 # Função para processar texto digitado
 def handle_text_input(texto_digitado):
     if texto_digitado:
         st.session_state.texto_extraido = texto_digitado
         st.session_state.file_name = "texto_digitado.txt"
-        change_state("objective")
+        st.session_state.app_state = "objective"
+        st.rerun()
     else:
         st.error("Por favor, digite algum texto antes de continuar.")
 
@@ -261,7 +263,8 @@ def handle_objetivo_input(objetivo_usuario):
     if objetivo_usuario:
         st.session_state.objetivo_final = objetivo_usuario
         gerar_resumo_e_faq(st.session_state.texto_extraido, objetivo_usuario)
-        change_state("resumo")
+        st.session_state.app_state = "resumo"
+        st.rerun()
 
 # Função para processar nova mensagem no chat
 def handle_new_message(message):
@@ -273,7 +276,8 @@ def handle_new_message(message):
                 message
             )
             st.session_state.chat_history.append({"pergunta": message, "resposta": resposta})
-        st.experimental_rerun()
+        st.session_state.app_state = "chat"
+        st.rerun()
 
 # Cabeçalho
 st.markdown("""
@@ -449,8 +453,6 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
             submitted = st.form_submit_button("Enviar", use_container_width=True)
             
         if submitted and message:
-            # Mudamos para o estado de chat
-            st.session_state.app_state = "chat"
             handle_new_message(message)
     
     if st.button("⬅️ Voltar ao início", use_container_width=True):
