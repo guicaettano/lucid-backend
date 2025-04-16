@@ -173,6 +173,8 @@ if "history_items" not in st.session_state:
     st.session_state.history_items = []
 if "selected_history_id" not in st.session_state:
     st.session_state.selected_history_id = None
+if "chat_mode" not in st.session_state:
+    st.session_state.chat_mode = False
 
 
 # Função para definir o método de entrada
@@ -410,7 +412,8 @@ if st.session_state.texto_extraido:
             with st.spinner("💡 Gerando resposta..."):
                 resposta = responder_com_maritaca(texto_extraido, objetivo_final, pergunta_usuario)
                 st.session_state.chat_history.append({"pergunta": pergunta_usuario, "resposta": resposta})
-                st.rerun()  # Recarrega a página para mostrar a nova mensagem
+                st.session_state.chat_mode = True
+                st.experimental_rerun()
 
 st.markdown("""
     <style>
