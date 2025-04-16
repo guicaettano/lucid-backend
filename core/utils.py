@@ -5,11 +5,21 @@ import io
 import re
 from core.detc_obj import extract_text_easyocr
 import openai
+import os
+from dotenv import load_dotenv
+import httpx
 
-client = openai.OpenAI(
-    api_key="109232856114214290025_3dedd8dadabfe8df", 
-    base_url="https://chat.maritaca.ai/api",
-)
+load_dotenv()
+
+try:
+    client = openai.OpenAI(
+        api_key=os.getenv("MARITACA_API_KEY", "109232856114214290025_3dedd8dadabfe8df"),
+        base_url=os.getenv("MARITACA_BASE_URL", "https://chat.maritaca.ai/api"),
+        http_client=httpx.Client(timeout=30.0)
+    )
+except Exception as e:
+    print(f"Error initializing OpenAI client: {e}")
+    client = None
 
 
 def process_file(uploaded_file):
@@ -63,25 +73,25 @@ def feedback_suggestion(doc_type):
 
 
 def sugerir_objetivo(texto):
-    """Sugere objetivos com base em análise de IA do conteúdo do documento."""
-    prompt = (
-        f"Analise o seguinte documento e sugira 3 objetivos específicos e relevantes para trabalhar com este conteúdo. "
-        f"Os objetivos devem ser práticos e focados em extrair valor do documento. "
-        f"Retorne apenas os objetivos, um por linha, sem numeração ou formatação adicional.\n\n"
-        f"Documento:\n{texto[:8000]}"
-    )
+    if not client:
+        return ["Erro ao inicializar o cliente de IA. Por favor, tente novamente mais tarde."]
+        
+    try:
+        prompt = (
+            f"Você é um assistente que leu um documento. "
+            f"Com base no conteúdo, sugira 3 objetivos possíveis que uma pessoa poderia ter ao ler este documento.\n\n"
+            f"Documento:\n{texto[:8000]}"
+        )
 
-    response = client.chat.completions.create(
-        model="sabia-3",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=500,
-    )
-    
-    # Processar a resposta para extrair as sugestões
-    sugestoes = [s.strip() for s in response.choices[0].message.content.split("\n") if s.strip()]
-    
-    # Garantir que temos pelo menos 3 sugestões
-    while len(sugestoes) < 3:
-        sugestoes.append("Resumir conteúdo principal")
-    
-    return sugestoes[:3]  # Retornar apenas as 3 primeiras sugestões
+        response = client.chat.completions.create(
+            model="sabia-3",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=1000,
+        )
+
+        resposta = response.choices[0].message.content
+        sugestoes = [linha.strip("-• \n") for linha in resposta.split("\n") if linha.strip()]
+        return sugestoes[:3]  # Retorna apenas as 3 primeiras sugestões
+    except Exception as e:
+        print(f"Error generating suggestions: {e}")
+        return ["Desculpe, ocorreu um erro ao gerar as sugestões. Por favor, tente novamente."]
