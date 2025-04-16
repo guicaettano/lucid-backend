@@ -177,6 +177,8 @@ if "chat_mode" not in st.session_state:
     st.session_state.chat_mode = False
 if "last_message" not in st.session_state:
     st.session_state.last_message = None
+if "processed_message" not in st.session_state:
+    st.session_state.processed_message = None
 
 
 # Função para definir o método de entrada
@@ -408,14 +410,20 @@ if st.session_state.texto_extraido:
             st.markdown(f"<div class='card'><b>Você:</b> {chat['pergunta']}</div>", unsafe_allow_html=True)
             st.markdown(f"<div class='card'><b>Lucid:</b> {chat['resposta']}</div>", unsafe_allow_html=True)
         
-        pergunta_usuario = st.chat_input("Escreva sua pergunta sobre o conteúdo...")
-
-        if pergunta_usuario and pergunta_usuario != st.session_state.last_message:
-            with st.spinner("💡 Gerando resposta..."):
-                resposta = responder_com_maritaca(texto_extraido, objetivo_final, pergunta_usuario)
-                st.session_state.chat_history.append({"pergunta": pergunta_usuario, "resposta": resposta})
-                st.session_state.last_message = pergunta_usuario
-                st.session_state.chat_mode = True
+        # Chat input com container para manter o estado
+        chat_container = st.container()
+        with chat_container:
+            pergunta_usuario = st.chat_input("Escreva sua pergunta sobre o conteúdo...")
+            
+            if pergunta_usuario and pergunta_usuario != st.session_state.processed_message:
+                st.session_state.processed_message = pergunta_usuario
+                with st.spinner("💡 Gerando resposta..."):
+                    resposta = responder_com_maritaca(texto_extraido, objetivo_final, pergunta_usuario)
+                    st.session_state.chat_history.append({"pergunta": pergunta_usuario, "resposta": resposta})
+                    st.session_state.chat_mode = True
+                    # Força a atualização do container
+                    chat_container.empty()
+                    st.experimental_rerun()
 
 st.markdown("""
     <style>
