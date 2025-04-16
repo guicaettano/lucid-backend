@@ -1,5 +1,4 @@
 import streamlit as st
-from core.detc_obj import extract_text_easyocr
 from utils import process_file
 from core.faq_generator import gerar_faq  
 from core.summarizer import resumir_texto
