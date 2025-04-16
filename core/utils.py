@@ -73,25 +73,9 @@ def feedback_suggestion(doc_type):
 
 
 def sugerir_objetivo(texto):
-    if not client:
-        return ["Erro ao inicializar o cliente de IA. Por favor, tente novamente mais tarde."]
-        
-    try:
-        prompt = (
-            f"Você é um assistente que leu um documento. "
-            f"Com base no conteúdo, sugira 3 objetivos possíveis que uma pessoa poderia ter ao ler este documento.\n\n"
-            f"Documento:\n{texto[:8000]}"
-        )
-
-        response = client.chat.completions.create(
-            model="sabia-3",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=1000,
-        )
-
-        resposta = response.choices[0].message.content
-        sugestoes = [linha.strip("-• \n") for linha in resposta.split("\n") if linha.strip()]
-        return sugestoes[:3]  # Retorna apenas as 3 primeiras sugestões
-    except Exception as e:
-        print(f"Error generating suggestions: {e}")
-        return ["Desculpe, ocorreu um erro ao gerar as sugestões. Por favor, tente novamente."]
+    # Sugestões simples e diretas que funcionam bem com o click
+    return [
+        "Resumir o conteúdo principal",
+        "Extrair pontos-chave",
+        "Gerar perguntas frequentes"
+    ]
