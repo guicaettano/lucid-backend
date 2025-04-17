@@ -345,27 +345,9 @@ def handle_new_message(message):
         st.rerun()
 
 # Cabeçalho
-logo_path = "assets/logo.svg"
-
 st.markdown("""
-    <style>
-    .logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 2rem auto;
-        max-width: 600px;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-col1, col2, col3 = st.columns([1,2,1])
-with col2:
-    st.image(logo_path, use_column_width=True)
-    
-st.markdown("""
-    <div class="logo-container">
+    <div class="hero-container">
+        <div class="hero-title">Lucid</div>
         <div class="hero-subtitle">Uma tela. Um comando. Insights infinitos...</div>
     </div>
 """, unsafe_allow_html=True)
