@@ -16,18 +16,20 @@ st.set_page_config(page_title="Lucid", layout="centered")
 # CSS para estilização
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;700&display=swap');
     
     html, body, [class*="css"] {
-        font-family: 'Roboto', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
         background-color: #ffffff;
         color: #000000;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        font-feature-settings: "kern" 1, "liga" 1;
     }
 
     .hero-title {
-        font-family: 'Roboto', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
         text-align: center;
         font-size: 4.5rem !important;
         font-weight: 200;
@@ -36,7 +38,7 @@ st.markdown("""
     }
 
     .hero-subtitle {
-        font-family: 'Roboto', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
         text-align: center;
         font-size: 1.5rem !important;
         font-weight: 200;
@@ -62,7 +64,7 @@ st.markdown("""
     }
 
     .section-title {
-        font-family: 'Roboto', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
         font-size: 1.6rem;
         font-weight: 500;
         margin-top: 2rem;
@@ -74,7 +76,7 @@ st.markdown("""
     }
 
     .card {
-        font-family: 'Roboto', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
         background: #ffffff;
         color: #1d1d1f;
         padding: 1.2rem;
@@ -135,7 +137,7 @@ st.markdown("""
         margin-top: 4rem;
     }
     .choice-title {
-        font-family: 'Roboto', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
         font-size: 1.5rem !important;
         font-weight: 200;
         letter-spacing: -0.025em;
@@ -182,68 +184,40 @@ st.markdown("""
     }
     /* Estilo para texto de input */
     .stTextInput input, .stTextArea textarea {
-        font-family: 'Roboto', sans-serif !important;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif !important;
         font-size: 1rem !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para botões */
     .stButton button {
-        font-family: 'Roboto', sans-serif !important;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif !important;
         font-weight: 500 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para texto do chat */
     .chat-message {
-        font-family: 'Roboto', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
         line-height: 1.47059;
         letter-spacing: -0.01em;
     }
     /* Estilo para placeholders */
     ::placeholder {
-        font-family: 'Roboto', sans-serif !important;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif !important;
         font-weight: 300 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para o rodapé */
     .fixed-footer {
-        font-family: 'Roboto', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
         font-weight: 300;
         letter-spacing: -0.01em;
     }
-    /* Ajustes específicos para parecer mais com SF Pro */
-    [class*="css"] {
-        font-feature-settings: "kern" 1, "liga" 1;
-    }
-    /* Ajustes de peso de fonte para maior similaridade com SF Pro */
-    strong, b {
-        font-weight: 600;
-    }
-    /* Estilo para o botão de submit do form */
-    button[type="submit"] {
-        background-color: transparent !important;
-        border: none !important;
-        padding: 0 !important;
-        visibility: hidden !important;
-    }
-    /* Remove o fundo azul do botão de submit */
-    .stButton button[data-testid="baseButton-primary"] {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        visibility: hidden !important;
-    }
-    .logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 2rem auto;
-        max-width: 600px;
-    }
-    .logo-image {
-        width: 200px;
-        margin-bottom: 1rem;
+    /* Otimizações de renderização */
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     }
     </style>
 """, unsafe_allow_html=True)
