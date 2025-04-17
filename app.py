@@ -16,10 +16,10 @@ st.set_page_config(page_title="Lucid", layout="centered")
 # CSS para estilização
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
     
     html, body, [class*="css"] {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
         background-color: #ffffff;
         color: #000000;
         -webkit-font-smoothing: antialiased;
@@ -29,20 +29,20 @@ st.markdown("""
     }
 
     .hero-title {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
         text-align: center;
         font-size: 4.5rem !important;
-        font-weight: 200;
-        letter-spacing: -0.025em;
+        font-weight: 300;
+        letter-spacing: -0.03em;
         color: #1d1d1f;
     }
 
     .hero-subtitle {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
         text-align: center;
         font-size: 1.5rem !important;
-        font-weight: 200;
-        letter-spacing: -0.025em;
+        font-weight: 300;
+        letter-spacing: -0.02em;
         color: #1d1d1f;
         opacity: 0.9;
     }
@@ -64,7 +64,7 @@ st.markdown("""
     }
 
     .section-title {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
         font-size: 1.6rem;
         font-weight: 500;
         margin-top: 2rem;
@@ -76,7 +76,7 @@ st.markdown("""
     }
 
     .card {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
         background: #ffffff;
         color: #1d1d1f;
         padding: 1.2rem;
@@ -84,7 +84,7 @@ st.markdown("""
         margin-bottom: 1rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         animation: fadeIn 0.7s ease-in;
-        line-height: 1.47059;
+        line-height: 1.5;
         letter-spacing: -0.01em;
     }
 
@@ -137,7 +137,7 @@ st.markdown("""
         margin-top: 4rem;
     }
     .choice-title {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
         font-size: 1.5rem !important;
         font-weight: 200;
         letter-spacing: -0.025em;
@@ -184,31 +184,31 @@ st.markdown("""
     }
     /* Estilo para texto de input */
     .stTextInput input, .stTextArea textarea {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif !important;
+        font-family: 'Space Grotesk', system-ui, sans-serif !important;
         font-size: 1rem !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para botões */
     .stButton button {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif !important;
+        font-family: 'Space Grotesk', system-ui, sans-serif !important;
         font-weight: 500 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para texto do chat */
     .chat-message {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
-        line-height: 1.47059;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
+        line-height: 1.5;
         letter-spacing: -0.01em;
     }
     /* Estilo para placeholders */
     ::placeholder {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif !important;
+        font-family: 'Space Grotesk', system-ui, sans-serif !important;
         font-weight: 300 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para o rodapé */
     .fixed-footer {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
         font-weight: 300;
         letter-spacing: -0.01em;
     }
@@ -217,7 +217,6 @@ st.markdown("""
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
-        font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     }
     </style>
 """, unsafe_allow_html=True)
