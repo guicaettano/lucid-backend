@@ -422,7 +422,7 @@ elif st.session_state.app_state == "objective":
         placeholder="Ex: quero um resumo executivo"
     )
 
-    if st.button("Processar com este objetivo", use_container_width=True):
+    if objetivo_usuario:
         handle_objetivo_input(objetivo_usuario)
     
     if st.button("⬅️ Voltar ao início", use_container_width=True):
@@ -451,7 +451,7 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
     # Input de chat com form para evitar loop
     with st.form("chat_form", clear_on_submit=True):
         message = st.text_input("", placeholder="Escreva sua pergunta sobre o conteúdo...", label_visibility="collapsed", key="message_input")
-        submitted = st.form_submit_button("Enviar", type="primary")
+        submitted = st.form_submit_button("", type="primary")
         if submitted and message:
             # Criar um ID de sessão baseado no nome do arquivo atual
             session_id = f"doc_{st.session_state.file_name}"
