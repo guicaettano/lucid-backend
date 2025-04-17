@@ -7,8 +7,8 @@ load_dotenv()
 
 try:
     client = openai.OpenAI(
-        api_key=os.getenv("MARITACA_API_KEY", "109232856114214290025_3dedd8dadabfe8df"),
-        base_url=os.getenv("MARITACA_BASE_URL", "https://chat.maritaca.ai/api"),
+        api_key=os.getenv("MARITACA_API_KEY"),
+        base_url=os.getenv("MARITACA_BASE_URL"),
         http_client=httpx.Client(timeout=30.0),
     )
 except Exception as e:
@@ -44,4 +44,3 @@ def resumir_texto(texto, objetivo):
 if __name__ == "__main__":
     texto_teste = "Este é um relatório contendo dados de desempenho trimestral, indicadores de vendas e análise de mercado."
     print(resumir_texto(texto_teste, "Resumir os principais pontos."))
-
