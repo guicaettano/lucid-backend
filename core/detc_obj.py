@@ -1,6 +1,7 @@
 import easyocr
 from PIL import Image
 import io
+import os
 
 # Inicializa o leitor com suporte ao português
 reader = easyocr.Reader(["pt"], gpu=False)
@@ -15,4 +16,6 @@ def extract_text_easyocr(image_path_or_bytes):
         image_path = image_path_or_bytes
 
     results = reader.readtext(image_path, detail=0)  # detail=0 retorna só o texto
+
+    os.remove(image_path)  # Remove a imagem após de ser escaneada pelo EasyOCR
     return "\n".join(results)
