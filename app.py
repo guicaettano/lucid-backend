@@ -16,20 +16,19 @@ st.set_page_config(page_title="Lucid", layout="centered")
 # CSS para estilização
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!@#$%^&*()');
     
     html, body, [class*="css"] {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         background-color: #ffffff;
         color: #000000;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
-        font-feature-settings: "kern" 1, "liga" 1;
     }
 
     .hero-title {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         text-align: center;
         font-size: 4.5rem !important;
         font-weight: 300;
@@ -38,7 +37,7 @@ st.markdown("""
     }
 
     .hero-subtitle {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         text-align: center;
         font-size: 1.5rem !important;
         font-weight: 300;
@@ -64,7 +63,7 @@ st.markdown("""
     }
 
     .section-title {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         font-size: 1.6rem;
         font-weight: 500;
         margin-top: 2rem;
@@ -76,7 +75,7 @@ st.markdown("""
     }
 
     .card {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         background: #ffffff;
         color: #1d1d1f;
         padding: 1.2rem;
@@ -137,7 +136,7 @@ st.markdown("""
         margin-top: 4rem;
     }
     .choice-title {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         font-size: 1.5rem !important;
         font-weight: 200;
         letter-spacing: -0.025em;
@@ -184,39 +183,58 @@ st.markdown("""
     }
     /* Estilo para texto de input */
     .stTextInput input, .stTextArea textarea {
-        font-family: 'Space Grotesk', system-ui, sans-serif !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
         font-size: 1rem !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para botões */
     .stButton button {
-        font-family: 'Space Grotesk', system-ui, sans-serif !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
         font-weight: 500 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para texto do chat */
     .chat-message {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         line-height: 1.5;
         letter-spacing: -0.01em;
     }
     /* Estilo para placeholders */
     ::placeholder {
-        font-family: 'Space Grotesk', system-ui, sans-serif !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
         font-weight: 300 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para o rodapé */
     .fixed-footer {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         font-weight: 300;
         letter-spacing: -0.01em;
+    }
+    /* Otimizações para dispositivos móveis */
+    @media screen and (max-width: 768px) {
+        html {
+            font-size: 14px;
+        }
+        
+        .hero-title {
+            font-size: 3rem !important;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem !important;
+        }
     }
     /* Otimizações de renderização */
     * {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
+    }
+    /* Font display swap para carregamento mais rápido */
+    @font-face {
+        font-family: 'Inter';
+        font-display: swap;
     }
     </style>
 """, unsafe_allow_html=True)
