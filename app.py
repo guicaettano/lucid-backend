@@ -16,19 +16,15 @@ st.set_page_config(page_title="Lucid", layout="centered")
 # CSS para estilização
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500;600&display=swap&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!@#$%^&*()');
     
     html, body, [class*="css"] {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
-        background-color: #ffffff;
-        color: #000000;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
     }
 
     .hero-title {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
         text-align: center;
         font-size: 4.5rem !important;
         font-weight: 300;
@@ -37,7 +33,7 @@ st.markdown("""
     }
 
     .hero-subtitle {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
         text-align: center;
         font-size: 1.5rem !important;
         font-weight: 300;
