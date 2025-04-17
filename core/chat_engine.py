@@ -20,13 +20,13 @@ except Exception as e:
 # Chave: hash do documento, Valor: histórico de conversa
 doc_historicos = {}
 
-def responder_com_maritaca(texto, objetivo, pergunta):
+def responder_com_maritaca(texto, objetivo, pergunta, session_id=None):
     if not client:
         return "Erro ao inicializar o cliente de IA. Por favor, tente novamente mais tarde."
     
     try:
-        # Criar um identificador para o documento atual
-        doc_id = hash(texto[:500] + objetivo)
+        # Usar o session_id fornecido ou criar um baseado no texto e objetivo
+        doc_id = session_id if session_id else hash(texto[:500] + objetivo)
         
         # Inicializar histórico para este documento se não existir
         if doc_id not in doc_historicos:
@@ -60,11 +60,8 @@ def responder_com_maritaca(texto, objetivo, pergunta):
         
         resposta = response.choices[0].message.content
         
-        # Salvar esta interação no histórico
-        historico_conversa.append({
-            "pergunta": pergunta,
-            "resposta": resposta
-        })
+        # Adicionar ao histórico
+        historico_conversa.append({"pergunta": pergunta, "resposta": resposta})
         
         return resposta
     except Exception as e:
