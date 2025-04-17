@@ -231,32 +231,42 @@ def handle_sugestao_click(sugestao):
 
 # Função para gerar resumo e FAQ
 def gerar_resumo_e_faq(texto, objetivo):
-    # Gerar resumo
-    with st.spinner("🧠 Resumindo com inteligência..."):
-        resumo = resumir_texto(texto, objetivo)
-        st.session_state.resumo_gerado = resumo
-    
-    # Adicionar ao histórico
-    timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
-    history_id = add_to_history(st.session_state.file_name, objetivo, timestamp)
-    
-    # Salvar no banco
-    session = Session()
-    doc = Documento(
-        id=str(uuid.uuid4()),
-        nome_arquivo=st.session_state.file_name,
-        conteudo=texto,
-        objetivo=objetivo,
-        resumo=resumo
-    )
-    session.add(doc)
-    session.commit()
-    session.close()
-    
-    # Gerar FAQ
-    with st.spinner("❓ Gerando perguntas frequentes..."):
-        faqs = gerar_faq(texto, objetivo)
-        st.session_state.faqs_gerados = faqs
+    try:
+        # Gerar resumo
+        with st.spinner("🧠 Resumindo com inteligência..."):
+            resumo = resumir_texto(texto, objetivo)
+            st.session_state.resumo_gerado = resumo
+        
+        # Adicionar ao histórico
+        timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
+        history_id = add_to_history(st.session_state.file_name, objetivo, timestamp)
+        
+        # Salvar no banco
+        try:
+            session = Session()
+            doc = Documento(
+                id=str(uuid.uuid4()),
+                nome_arquivo=st.session_state.file_name,
+                conteudo=texto,
+                objetivo=objetivo,
+                resumo=resumo
+            )
+            session.add(doc)
+            session.commit()
+        except Exception as e:
+            print(f"Erro ao salvar no banco de dados: {e}")
+            # Continua mesmo se houver erro no banco
+        finally:
+            session.close()
+        
+        # Gerar FAQ
+        with st.spinner("❓ Gerando perguntas frequentes..."):
+            faqs = gerar_faq(texto, objetivo)
+            st.session_state.faqs_gerados = faqs
+            
+    except Exception as e:
+        print(f"Erro ao gerar resumo e FAQ: {e}")
+        st.error("Ocorreu um erro ao processar o documento. Por favor, tente novamente.")
 
 # Função para processar objetivo digitado
 def handle_objetivo_input(objetivo_usuario):
