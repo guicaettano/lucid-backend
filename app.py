@@ -205,7 +205,8 @@ st.markdown("""
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-bottom: 2rem;
+        margin: 2rem auto;
+        max-width: 600px;
     }
     .logo-image {
         width: 200px;
@@ -344,9 +345,27 @@ def handle_new_message(message):
         st.rerun()
 
 # Cabeçalho
+logo_path = "assets/logo.svg"
+
+st.markdown("""
+    <style>
+    .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 2rem auto;
+        max-width: 600px;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns([1,2,1])
+with col2:
+    st.image(logo_path, use_column_width=True)
+    
 st.markdown("""
     <div class="logo-container">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAABkCAYAAACoy2Z3AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAApZJREFUeJzt3U1u1EAUheG3q5MQYMkSWAcrYAUsIawB1sCPxA5YAktgB0wySafTY7tdLtd9n2RZkWL5+F7ZKlWV27ZHAQAA4L+9uPUDAACwTwQIAAANBAjQgJkdZvaXmb2+9bMAtxZ+CxFAG2b2u6R3kl5J+iTpwd2/3/apgNsggQCVzOyVpD8kfXD3H+7+SdJXSX/e9smA2yBAgHrv9ZQ4Pj/7t8+SPpjZ4TaPBNwOAQLU+1XSN3f/+ezvPkn6IendTZ4IuCECBKj3VtLXF/7+i6QjCQRPCAEC1Hsp6b8wcPeTpO+SXt/kiYAbIkCAej8k/fbC338VCQRPDAECFDOzg6Tfdfn+8VPSGzN7deVHAm6KAAHqvdPTe8fnLhPIG0kECJ4OAgSod5L0/YV/fyPpKOntdR8HuC0CBKj3n/uHmb2U9FrMwMITQ4AA9b5Kemnvz/9Bkpl9kPSDAMGTQoAA9b5I+nB+/zCzVwQInhoCBKj3WdKbswuEv+gpgXD/wJNCgADFzs4fZnYws58ECJ4iAgSo91nSu7MLxGtJJxIInhICBKh3/v7xQtKBAMGTQ4AA9c7vHwQIniwCBKh3fv8gQPBkESBAvfP7BwGCJ4sAAeqdv38QIHiyCBCg3vn9gwDBk0WAAPXO7x8ECJ4sAgSod37/IEDwZBEgQL3z+wcBgieLAAHqnd8/CBA8WQQIUO/8/kGA4MkiQIB65/cPAgRPFgEC1Du/fxAgeLL27v5V0ltJf0n64O7f3P2zpN8lfb7p0wE3YO5+62cAAGCXSCAAADQQIAAANBAgAAA0ECAAADQQIAAANBAgAAA0ECAAADQQIAAANBAgAAA0ECAAADQQIAAANBAgAAA0ECAAADQQIAAANBAgAAA0/AswH4ZN1Bx6UAAAAABJRU5ErkJggg==" class="logo-image" alt="Lucid Logo">
         <div class="hero-subtitle">Uma tela. Um comando. Insights infinitos...</div>
     </div>
 """, unsafe_allow_html=True)
