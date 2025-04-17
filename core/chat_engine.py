@@ -2,6 +2,7 @@ import openai
 import os
 from dotenv import load_dotenv
 import httpx
+from collections import deque
 
 load_dotenv()
 
@@ -15,19 +16,22 @@ except Exception as e:
     print(f"Error initializing OpenAI client: {e}")
     client = None
 
+historico_conversa = deque(maxlen=10)
 def responder_com_maritaca(texto, objetivo, pergunta):
     if not client:
         return "Erro ao inicializar o cliente de IA. Por favor, tente novamente mais tarde."
         
     try:
-        contexto = f"Você é um assistente que leu um documento com o seguinte objetivo: '{objetivo}'.\n"
-        contexto += f"Com base no documento e no objetivo, responda à seguinte pergunta de forma clara e concisa.\n\n"
-        contexto += f"Documento:\n{texto[:8000]}\n\n"
-        contexto += f"Pergunta: {pergunta}"
+        prompt = (
+            f"Você é um assistente que leu um documento com o seguinte objetivo: '{objetivo}'.\n"
+            f"Com base no documento e no objetivo, responda à seguinte pergunta de forma clara e concisa:\n\n"
+            f"Documento:\n{texto[:8000]}\n\n"
+            f"Pergunta: {pergunta}"
+        )
 
         response = client.chat.completions.create(
             model="sabia-3",
-            messages=[{"role": "user", "content": contexto}],
+            messages=[{"role": "user", "content": prompt}],
             max_tokens=1000,
         )
 
@@ -38,4 +42,4 @@ def responder_com_maritaca(texto, objetivo, pergunta):
 
 if __name__ == "__main__":
     texto_teste = "Este é um relatório contendo dados de desempenho trimestral, indicadores de vendas e análise de mercado."
-    print(responder_com_maritaca(texto_teste, "Resumir os principais pontos.", "Qual é o objetivo do relatório?"))
+    print(responder_com_maritaca(texto_teste, "Resumir os principais pontos."))

@@ -222,51 +222,41 @@ def add_to_history(file_name, objetivo, timestamp):
     st.session_state.history_items.insert(0, history_item)
     return history_id
 
-# Função para gerar resumo e FAQ
-def gerar_resumo_e_faq(texto, objetivo):
-    try:
-        # Gerar resumo
-        with st.spinner("🧠 Resumindo com inteligência..."):
-            resumo = resumir_texto(texto, objetivo)
-            st.session_state.resumo_gerado = resumo
-        
-        # Adicionar ao histórico
-        timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
-        history_id = add_to_history(st.session_state.file_name, objetivo, timestamp)
-        
-        # Salvar no banco
-        try:
-            session = Session()
-            doc = Documento(
-                id=str(uuid.uuid4()),
-                nome_arquivo=st.session_state.file_name,
-                conteudo=texto,
-                objetivo=objetivo,
-                resumo=resumo
-            )
-            session.add(doc)
-            session.commit()
-        except Exception as e:
-            print(f"Erro ao salvar no banco de dados: {e}")
-        finally:
-            session.close()
-        
-        # Gerar FAQ
-        with st.spinner("❓ Gerando perguntas frequentes..."):
-            faqs = gerar_faq(texto, objetivo)
-            st.session_state.faqs_gerados = faqs
-            
-    except Exception as e:
-        print(f"Erro ao gerar resumo e FAQ: {e}")
-        st.error("Ocorreu um erro ao processar o documento. Por favor, tente novamente.")
-
 # Função para lidar com o clique na sugestão
 def handle_sugestao_click(sugestao):
     st.session_state.objetivo_selecionado = sugestao
     st.session_state.objetivo_final = sugestao
     gerar_resumo_e_faq(st.session_state.texto_extraido, sugestao)
-    st.session_state.app_state = "resumo"
-    st.rerun()
+    change_state("resumo")
+
+# Função para gerar resumo e FAQ
+def gerar_resumo_e_faq(texto, objetivo):
+    # Gerar resumo
+    with st.spinner("🧠 Resumindo com inteligência..."):
+        resumo = resumir_texto(texto, objetivo)
+        st.session_state.resumo_gerado = resumo
+    
+    # Adicionar ao histórico
+    timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
+    history_id = add_to_history(st.session_state.file_name, objetivo, timestamp)
+    
+    # Salvar no banco
+    session = Session()
+    doc = Documento(
+        id=str(uuid.uuid4()),
+        nome_arquivo=st.session_state.file_name,
+        conteudo=texto,
+        objetivo=objetivo,
+        resumo=resumo
+    )
+    session.add(doc)
+    session.commit()
+    session.close()
+    
+    # Gerar FAQ
+    with st.spinner("❓ Gerando perguntas frequentes..."):
+        faqs = gerar_faq(texto, objetivo)
+        st.session_state.faqs_gerados = faqs
 
 # Função para processar objetivo digitado
 def handle_objetivo_input(objetivo_usuario):
@@ -432,8 +422,7 @@ elif st.session_state.app_state == "objective":
         handle_objetivo_input(objetivo_usuario)
     
     if st.button("⬅️ Voltar ao início", use_container_width=True):
-        st.session_state.app_state = "inicio"
-        st.rerun()
+        change_state("inicio")
 
 elif st.session_state.app_state == "resumo" or st.session_state.app_state == "chat":
     # Se temos um resumo gerado, exibir
@@ -462,8 +451,7 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
         handle_new_message(message)
     
     if st.button("⬅️ Voltar ao início", use_container_width=True):
-        st.session_state.app_state = "inicio"
-        st.rerun()
+        change_state("inicio")
 
 # Rodapé fixo
 st.markdown("""
