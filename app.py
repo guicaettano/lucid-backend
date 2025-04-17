@@ -267,13 +267,18 @@ def handle_objetivo_input(objetivo_usuario):
         st.rerun()
 
 # Função para processar nova mensagem no chat
+# Função para processar nova mensagem no chat
 def handle_new_message(message):
     if message:
         with st.spinner("💡 Gerando resposta..."):
+            # Criar um ID de sessão baseado no nome do arquivo atual
+            session_id = f"doc_{st.session_state.file_name}"
+            
             resposta = responder_com_maritaca(
                 st.session_state.texto_extraido, 
                 st.session_state.objetivo_final, 
-                message
+                message,
+                session_id  # Adicione este parâmetro
             )
             st.session_state.chat_history.append({"pergunta": message, "resposta": resposta})
         st.session_state.app_state = "chat"
