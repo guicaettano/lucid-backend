@@ -16,54 +16,70 @@ st.set_page_config(page_title="Lucid", layout="centered")
 # CSS para estilização
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
+
+    /* Sistema de fontes inspirado no SF Pro */
+    :root {
+        --sf-font: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 
+                   system-ui, 'Helvetica Neue', Arial, sans-serif;
+    }
+    
     html, body, [class*="css"] {
-        font-family: 'Helvetica Neue', sans-serif;
+        font-family: var(--sf-font);
         background-color: #ffffff;
         color: #000000;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
     }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-container {
-        animation: fadeIn 1.2s ease-out;
-        margin-bottom: 3rem;
-    }
+
     .hero-title {
+        font-family: var(--sf-font);
         text-align: center;
         font-size: 4.5rem !important;
         font-weight: 200;
-        letter-spacing: -3px;
-        color: #000;
+        letter-spacing: -0.025em;
+        color: #1d1d1f;
     }
+
     .hero-subtitle {
+        font-family: var(--sf-font);
         text-align: center;
         font-size: 1.5rem !important;
         font-weight: 300;
-        color: #444;
-        opacity: 0.8;
+        color: #424245;
+        opacity: 0.9;
+        letter-spacing: -0.01em;
     }
+
     .section-title {
+        font-family: var(--sf-font);
         font-size: 1.6rem;
         font-weight: 500;
         margin-top: 2rem;
         margin-bottom: 1rem;
-        color: #0071e3;
+        color: #1d1d1f;
         text-align: center;
         animation: fadeIn 0.7s ease-in;
+        letter-spacing: -0.02em;
     }
+
     .card {
+        font-family: var(--sf-font);
         background: #ffffff;
-        color: #000000;
+        color: #1d1d1f;
         padding: 1.2rem;
-        border-radius: 10px;
+        border-radius: 12px;
         margin-bottom: 1rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         animation: fadeIn 0.7s ease-in;
+        line-height: 1.47059;
+        letter-spacing: -0.01em;
     }
+
     .option-card {
         background: #ffffff;
-        color: #0071e3;
+        color: #424245;
         padding: 2rem;
         border-radius: 10px;
         margin: 0.5rem;
@@ -71,7 +87,7 @@ st.markdown("""
         transition: transform 0.3s, box-shadow 0.3s;
         box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         text-align: center;
-        border: 2px solid #0071e3;
+        border: 2px solid #424245;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -82,16 +98,16 @@ st.markdown("""
     .option-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        background-color: #f0f8ff;
+        background-color: #f5f5f7;
     }
     .option-icon {
         font-size: 3rem;
         margin-bottom: 1rem;
-        color: #0071e3;
+        color: #424245;
     }
     .faq-box {
         display: inline-block;
-        background: #0071e3;
+        background: #424245;
         color: #fff;
         padding: 0.8rem 1.2rem;
         border-radius: 8px;
@@ -101,7 +117,7 @@ st.markdown("""
         transition: background 0.3s;
     }
     .faq-box:hover {
-        background: #005bb5;
+        background: #2d2d2f;
     }
     .footer {
         text-align: center;
@@ -111,7 +127,7 @@ st.markdown("""
     }
     .choice-title {
         font-size: 1.5rem;
-        color: #0071e3;
+        color: #424245;
         text-align: center;
         margin-bottom: 2rem;
     }
@@ -131,7 +147,7 @@ st.markdown("""
     }
     .history-objective {
         font-size: 0.9rem;
-        color: #0071e3;
+        color: #424245;
         margin-top: 4px;
     }
     .history-empty {
@@ -150,6 +166,44 @@ st.markdown("""
     /* Garantir que o botão não apareça em nenhum lugar após a seção de chat */
     .stButton > button:has(div:contains("⬅️")):has-ancestor(#chat-section ~ *) {
         display: none !important;
+    }
+    /* Estilo para texto de input */
+    .stTextInput input, .stTextArea textarea {
+        font-family: var(--sf-font) !important;
+        font-size: 1rem !important;
+        letter-spacing: -0.01em !important;
+    }
+    /* Estilo para botões */
+    .stButton button {
+        font-family: var(--sf-font) !important;
+        font-weight: 500 !important;
+        letter-spacing: -0.01em !important;
+    }
+    /* Estilo para texto do chat */
+    .chat-message {
+        font-family: var(--sf-font);
+        line-height: 1.47059;
+        letter-spacing: -0.01em;
+    }
+    /* Estilo para placeholders */
+    ::placeholder {
+        font-family: var(--sf-font) !important;
+        font-weight: 300 !important;
+        letter-spacing: -0.01em !important;
+    }
+    /* Estilo para o rodapé */
+    .fixed-footer {
+        font-family: var(--sf-font);
+        font-weight: 300;
+        letter-spacing: -0.01em;
+    }
+    /* Ajustes específicos para parecer mais com SF Pro */
+    [class*="css"] {
+        font-feature-settings: "kern" 1, "liga" 1;
+    }
+    /* Ajustes de peso de fonte para maior similaridade com SF Pro */
+    strong, b {
+        font-weight: 600;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -306,8 +360,8 @@ if st.session_state.app_state == "inicio":
         [data-testid="baseButton-secondary"]:has(div:contains("📁")) {
             height: 180px !important;
             background-color: white !important;
-            color: #0071e3 !important;
-            border: 2px solid #0071e3 !important;
+            color: #424245 !important;
+            border: 2px solid #424245 !important;
             border-radius: 10px !important;
             font-size: 1.2rem !important;
             font-weight: 500 !important;
@@ -322,7 +376,7 @@ if st.session_state.app_state == "inicio":
         [data-testid="baseButton-secondary"]:has(div:contains("📁")):hover {
             transform: translateY(-5px) !important;
             box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
-            background-color: #f0f8ff !important;
+            background-color: #f5f5f7 !important;
         }
         
         [data-testid="baseButton-secondary"]:has(div:contains("📁")) div {
@@ -348,8 +402,8 @@ if st.session_state.app_state == "inicio":
         [data-testid="baseButton-secondary"]:has(div:contains("✏️")) {
             height: 180px !important;
             background-color: white !important;
-            color: #0071e3 !important;
-            border: 2px solid #0071e3 !important;
+            color: #424245 !important;
+            border: 2px solid #424245 !important;
             border-radius: 10px !important;
             font-size: 1.2rem !important;
             font-weight: 500 !important;
@@ -364,7 +418,7 @@ if st.session_state.app_state == "inicio":
         [data-testid="baseButton-secondary"]:has(div:contains("✏️")):hover {
             transform: translateY(-5px) !important;
             box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
-            background-color: #f0f8ff !important;
+            background-color: #f5f5f7 !important;
         }
         
         [data-testid="baseButton-secondary"]:has(div:contains("✏️")) div {
