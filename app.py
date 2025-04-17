@@ -268,6 +268,7 @@ def handle_objetivo_input(objetivo_usuario):
 
 # Função para processar nova mensagem no chat
 # Função para processar nova mensagem no chat
+# Função para processar nova mensagem no chat
 def handle_new_message(message):
     if message:
         with st.spinner("💡 Gerando resposta..."):
