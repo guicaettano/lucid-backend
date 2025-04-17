@@ -17,14 +17,21 @@ st.set_page_config(page_title="Lucid", layout="centered")
 st.markdown("""
     <style>
     
-    html, body, [class*="css"] {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+    
+    .main-title {
+        font-family: 'Inter', Helvetica, Arial, sans-serif;
+        font-weight: 900;
+        font-size: 3.8rem;
+        line-height: 1.1;
+        text-align: center;
+        color: #000000;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.5rem;
     }
 
     .hero-title {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        font-family: 'Inter', Helvetica, Arial, sans-serif;
         text-align: center;
         font-size: 4.5rem !important;
         font-weight: 300;
