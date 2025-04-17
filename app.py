@@ -16,8 +16,10 @@ st.set_page_config(page_title="Lucid", layout="centered")
 # CSS para estilização
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+    
     html, body, [class*="css"] {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
         background-color: #ffffff;
         color: #000000;
         -webkit-font-smoothing: antialiased;
@@ -25,7 +27,7 @@ st.markdown("""
     }
 
     .hero-title {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
         text-align: center;
         font-size: 4.5rem !important;
         font-weight: 200;
@@ -34,7 +36,7 @@ st.markdown("""
     }
 
     .hero-subtitle {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
         text-align: center;
         font-size: 1.5rem !important;
         font-weight: 200;
@@ -60,7 +62,7 @@ st.markdown("""
     }
 
     .section-title {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 1.6rem;
         font-weight: 500;
         margin-top: 2rem;
@@ -72,7 +74,7 @@ st.markdown("""
     }
 
     .card {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
         background: #ffffff;
         color: #1d1d1f;
         padding: 1.2rem;
@@ -133,7 +135,7 @@ st.markdown("""
         margin-top: 4rem;
     }
     .choice-title {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 1.5rem !important;
         font-weight: 200;
         letter-spacing: -0.025em;
@@ -180,31 +182,31 @@ st.markdown("""
     }
     /* Estilo para texto de input */
     .stTextInput input, .stTextArea textarea {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
+        font-family: 'Inter', sans-serif !important;
         font-size: 1rem !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para botões */
     .stButton button {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
+        font-family: 'Inter', sans-serif !important;
         font-weight: 500 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para texto do chat */
     .chat-message {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
         line-height: 1.47059;
         letter-spacing: -0.01em;
     }
     /* Estilo para placeholders */
     ::placeholder {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
+        font-family: 'Inter', sans-serif !important;
         font-weight: 300 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para o rodapé */
     .fixed-footer {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
         font-weight: 300;
         letter-spacing: -0.01em;
     }
