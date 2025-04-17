@@ -267,8 +267,6 @@ def handle_objetivo_input(objetivo_usuario):
         st.rerun()
 
 # Função para processar nova mensagem no chat
-# Função para processar nova mensagem no chat
-# Função para processar nova mensagem no chat
 def handle_new_message(message):
     if message:
         with st.spinner("💡 Gerando resposta..."):
@@ -450,12 +448,23 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
         st.markdown(f"<div class='card'><b>Você:</b> {chat['pergunta']}</div>", unsafe_allow_html=True)
         st.markdown(f"<div class='card'><b>Lucid:</b> {chat['resposta']}</div>", unsafe_allow_html=True)
     
-    # Input de mensagem simples
-    message = st.text_input("", placeholder="Escreva sua pergunta sobre o conteúdo...", label_visibility="collapsed", key="message_input")
+    # Input de chat com form para evitar loop
+    with st.form("chat_form", clear_on_submit=True):
+        message = st.text_input("", placeholder="Escreva sua pergunta sobre o conteúdo...", label_visibility="collapsed", key="message_input")
+        submitted = st.form_submit_button("Enviar", type="primary")
+        if submitted and message:
+            # Criar um ID de sessão baseado no nome do arquivo atual
+            session_id = f"doc_{st.session_state.file_name}"
+            with st.spinner("💡 Gerando resposta..."):
+                resposta = responder_com_maritaca(
+                    st.session_state.texto_extraido, 
+                    st.session_state.objetivo_final, 
+                    message,
+                    session_id
+                )
+                st.session_state.chat_history.append({"pergunta": message, "resposta": resposta})
+                st.rerun()
 
-    if message:
-        handle_new_message(message)
-    
     if st.button("⬅️ Voltar ao início", use_container_width=True):
         change_state("inicio")
 
