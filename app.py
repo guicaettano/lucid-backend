@@ -59,7 +59,7 @@ st.markdown("""
     }
 
     .section-title {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
         font-size: 1.6rem;
         font-weight: 500;
         margin-top: 2rem;
@@ -71,7 +71,7 @@ st.markdown("""
     }
 
     .card {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
         background: #ffffff;
         color: #1d1d1f;
         padding: 1.2rem;
