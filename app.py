@@ -16,10 +16,10 @@ st.set_page_config(page_title="Lucid", layout="centered")
 # CSS para estilização
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!@#$%^&*()');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500;600&display=swap&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!@#$%^&*()');
     
     html, body, [class*="css"] {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         background-color: #ffffff;
         color: #000000;
         -webkit-font-smoothing: antialiased;
@@ -28,7 +28,7 @@ st.markdown("""
     }
 
     .hero-title {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         text-align: center;
         font-size: 4.5rem !important;
         font-weight: 300;
@@ -37,7 +37,7 @@ st.markdown("""
     }
 
     .hero-subtitle {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         text-align: center;
         font-size: 1.5rem !important;
         font-weight: 300;
@@ -63,7 +63,7 @@ st.markdown("""
     }
 
     .section-title {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         font-size: 1.6rem;
         font-weight: 500;
         margin-top: 2rem;
@@ -75,7 +75,7 @@ st.markdown("""
     }
 
     .card {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         background: #ffffff;
         color: #1d1d1f;
         padding: 1.2rem;
@@ -136,7 +136,7 @@ st.markdown("""
         margin-top: 4rem;
     }
     .choice-title {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         font-size: 1.5rem !important;
         font-weight: 200;
         letter-spacing: -0.025em;
@@ -183,31 +183,31 @@ st.markdown("""
     }
     /* Estilo para texto de input */
     .stTextInput input, .stTextArea textarea {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif !important;
         font-size: 1rem !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para botões */
     .stButton button {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif !important;
         font-weight: 500 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para texto do chat */
     .chat-message {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         line-height: 1.5;
         letter-spacing: -0.01em;
     }
     /* Estilo para placeholders */
     ::placeholder {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif !important;
         font-weight: 300 !important;
         letter-spacing: -0.01em !important;
     }
     /* Estilo para o rodapé */
     .fixed-footer {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         font-weight: 300;
         letter-spacing: -0.01em;
     }
@@ -234,6 +234,10 @@ st.markdown("""
     /* Font display swap para carregamento mais rápido */
     @font-face {
         font-family: 'Inter';
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Noto Sans';
         font-display: swap;
     }
     </style>
