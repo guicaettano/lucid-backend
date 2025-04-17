@@ -34,13 +34,13 @@ st.markdown("""
     }
 
     .hero-subtitle {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
         text-align: center;
         font-size: 1.5rem !important;
-        font-weight: 300;
-        color: #424245;
+        font-weight: 200;
+        letter-spacing: -0.025em;
+        color: #1d1d1f;
         opacity: 0.9;
-        letter-spacing: -0.01em;
     }
 
     .section-title {
@@ -117,10 +117,14 @@ st.markdown("""
         margin-top: 4rem;
     }
     .choice-title {
-        font-size: 1.5rem;
-        color: #424245;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-size: 1.5rem !important;
+        font-weight: 200;
+        letter-spacing: -0.025em;
+        color: #1d1d1f;
         text-align: center;
         margin-bottom: 2rem;
+        opacity: 0.9;
     }
     .history-item {
         padding: 12px;
