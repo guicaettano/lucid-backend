@@ -43,6 +43,22 @@ st.markdown("""
         opacity: 0.9;
     }
 
+    .hero-subtitle::after {
+        content: '...';
+        animation: loading 2s steps(4, end) infinite;
+        display: inline-block;
+        vertical-align: bottom;
+        margin-left: 2px;
+    }
+
+    @keyframes loading {
+        0% { content: ''; }
+        25% { content: '.'; }
+        50% { content: '..'; }
+        75% { content: '...'; }
+        100% { content: ''; }
+    }
+
     .section-title {
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
         font-size: 1.6rem;
@@ -200,6 +216,21 @@ st.markdown("""
     strong, b {
         font-weight: 600;
     }
+    /* Estilo para o botão de submit do form */
+    button[type="submit"] {
+        background-color: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        visibility: hidden !important;
+    }
+    /* Remove o fundo azul do botão de submit */
+    .stButton button[data-testid="baseButton-primary"] {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        visibility: hidden !important;
+    }
     .logo-container {
         display: flex;
         flex-direction: column;
@@ -348,7 +379,7 @@ def handle_new_message(message):
 st.markdown("""
     <div class="hero-container">
         <div class="hero-title">Lucid</div>
-        <div class="hero-subtitle">Uma tela. Um comando. Insights infinitos...</div>
+        <div class="hero-subtitle">Uma tela. Um comando. Insights infinitos</div>
     </div>
 """, unsafe_allow_html=True)
 
