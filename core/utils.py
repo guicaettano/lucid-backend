@@ -13,7 +13,7 @@ load_dotenv()
 
 try:
     client = openai.OpenAI(
-        api_key=os.getenv("MARITACA_API_KEY", "109232856114214290025_3dedd8dadabfe8df"),
+        api_key=os.getenv("MARITACA_API_KEY"),
         base_url=os.getenv("MARITACA_BASE_URL", "https://chat.maritaca.ai/api"),
         http_client=httpx.Client(timeout=30.0)
     )
