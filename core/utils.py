@@ -73,9 +73,37 @@ def feedback_suggestion(doc_type):
 
 
 def sugerir_objetivo(texto):
-    # Sugestões simples e diretas que funcionam bem com o click
-    return [
-        "Resumir o conteúdo principal",
-        "Extrair pontos-chave",
-        "Gerar perguntas frequentes"
-    ]
+    # Analisa o texto para gerar sugestões mais relevantes
+    doc_type, _ = detect_doc_type(texto)
+    
+    if doc_type == "Contrato":
+        return [
+            "Analisar cláusulas principais",
+            "Identificar obrigações e direitos",
+            "Extrair pontos críticos"
+        ]
+    elif doc_type == "Artigo científico ou acadêmico":
+        return [
+            "Resumir metodologia e resultados",
+            "Extrair conclusões principais",
+            "Identificar contribuições"
+        ]
+    elif doc_type == "Relatório empresarial":
+        return [
+            "Analisar indicadores de desempenho",
+            "Extrair insights estratégicos",
+            "Identificar tendências"
+        ]
+    elif doc_type == "Material educacional":
+        return [
+            "Simplificar conceitos principais",
+            "Extrair pontos de aprendizado",
+            "Gerar exercícios práticos"
+        ]
+    else:
+        # Sugestões genéricas para documentos não identificados
+        return [
+            "Resumir o conteúdo principal",
+            "Extrair pontos-chave",
+            "Gerar perguntas frequentes"
+        ]
