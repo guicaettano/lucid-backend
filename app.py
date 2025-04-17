@@ -222,13 +222,6 @@ def add_to_history(file_name, objetivo, timestamp):
     st.session_state.history_items.insert(0, history_item)
     return history_id
 
-# Função para lidar com o clique na sugestão
-def handle_sugestao_click(sugestao):
-    st.session_state.objetivo_selecionado = sugestao
-    st.session_state.objetivo_final = sugestao
-    gerar_resumo_e_faq(st.session_state.texto_extraido, sugestao)
-    change_state("resumo")
-
 # Função para gerar resumo e FAQ
 def gerar_resumo_e_faq(texto, objetivo):
     try:
@@ -255,7 +248,6 @@ def gerar_resumo_e_faq(texto, objetivo):
             session.commit()
         except Exception as e:
             print(f"Erro ao salvar no banco de dados: {e}")
-            # Continua mesmo se houver erro no banco
         finally:
             session.close()
         
@@ -267,6 +259,14 @@ def gerar_resumo_e_faq(texto, objetivo):
     except Exception as e:
         print(f"Erro ao gerar resumo e FAQ: {e}")
         st.error("Ocorreu um erro ao processar o documento. Por favor, tente novamente.")
+
+# Função para lidar com o clique na sugestão
+def handle_sugestao_click(sugestao):
+    st.session_state.objetivo_selecionado = sugestao
+    st.session_state.objetivo_final = sugestao
+    gerar_resumo_e_faq(st.session_state.texto_extraido, sugestao)
+    st.session_state.app_state = "resumo"
+    st.rerun()
 
 # Função para processar objetivo digitado
 def handle_objetivo_input(objetivo_usuario):
@@ -433,7 +433,8 @@ elif st.session_state.app_state == "objective":
         handle_objetivo_input(objetivo_usuario)
     
     if st.button("⬅️ Voltar ao início", use_container_width=True):
-        change_state("inicio")
+        st.session_state.app_state = "inicio"
+        st.rerun()
 
 elif st.session_state.app_state == "resumo" or st.session_state.app_state == "chat":
     # Se temos um resumo gerado, exibir
