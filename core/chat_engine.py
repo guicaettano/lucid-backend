@@ -2,7 +2,6 @@ import openai
 import os
 from dotenv import load_dotenv
 import httpx
-from collections import deque
 
 load_dotenv()
 
@@ -16,26 +15,15 @@ except Exception as e:
     print(f"Error initializing OpenAI client: {e}")
     client = None
 
-historico_conversa = deque(maxlen=10)
-def responder_com_maritaca(texto, objetivo, pergunta, historico=None):
+def responder_com_maritaca(texto, objetivo, pergunta):
     if not client:
         return "Erro ao inicializar o cliente de IA. Por favor, tente novamente mais tarde."
         
     try:
-        # Construir o contexto com histórico
         contexto = f"Você é um assistente que leu um documento com o seguinte objetivo: '{objetivo}'.\n"
         contexto += f"Com base no documento e no objetivo, responda à seguinte pergunta de forma clara e concisa.\n\n"
         contexto += f"Documento:\n{texto[:8000]}\n\n"
-        
-        # Adicionar histórico da conversa se existir
-        if historico:
-            contexto += "\nHistórico da conversa:\n"
-            for mensagem in historico:
-                contexto += f"Usuário: {mensagem['pergunta']}\n"
-                contexto += f"Assistente: {mensagem['resposta']}\n"
-            contexto += "\n"
-        
-        contexto += f"Pergunta atual: {pergunta}"
+        contexto += f"Pergunta: {pergunta}"
 
         response = client.chat.completions.create(
             model="sabia-3",

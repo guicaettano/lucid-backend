@@ -283,8 +283,7 @@ def handle_new_message(message):
             resposta = responder_com_maritaca(
                 st.session_state.texto_extraido, 
                 st.session_state.objetivo_final, 
-                message,
-                st.session_state.chat_history  # Passando o histórico da conversa
+                message
             )
             st.session_state.chat_history.append({"pergunta": message, "resposta": resposta})
         st.session_state.app_state = "chat"
@@ -463,7 +462,8 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
         handle_new_message(message)
     
     if st.button("⬅️ Voltar ao início", use_container_width=True):
-        change_state("inicio")
+        st.session_state.app_state = "inicio"
+        st.rerun()
 
 # Rodapé fixo
 st.markdown("""
