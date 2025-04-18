@@ -320,7 +320,7 @@ def handle_sugestao_click(sugestao):
 
 # Função para gerar resumo e FAQ
 def gerar_resumo_e_faq(texto, objetivo):
-    # Gerar resumo
+    # Gerar resumo primeiro
     with st.spinner("🧠 Resumindo com inteligência..."):
         resumo = resumir_texto(texto, objetivo)
         st.session_state.resumo_gerado = resumo
@@ -329,29 +329,42 @@ def gerar_resumo_e_faq(texto, objetivo):
     timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
     history_id = add_to_history(st.session_state.file_name, objetivo, timestamp)
     
-    # Salvar no banco
+    # Salvar no banco com tratamento de erro adequado
     session = Session()
     try:
+        # Log para debug
+        print(f"💾 Salvando documento: {st.session_state.file_name}")
+        print(f"📝 Objetivo: {objetivo}")
+        print(f"📄 Tamanho do resumo: {len(resumo)} caracteres")
+        
         doc = Documento(
             id=str(uuid.uuid4()),
             nome_arquivo=st.session_state.file_name,
             objetivo=objetivo,
-            resumo=resumo[:5000],  # Limita o tamanho do resumo
+            resumo=resumo[:5000] if resumo else "",  # Previne None
+            faq=None,  # Será atualizado depois
+            chat=None
         )
         session.add(doc)
         session.commit()
         print("✅ Documento salvo com sucesso!")
+        
+        # Gerar FAQ após salvar o documento
+        with st.spinner("❓ Gerando perguntas frequentes..."):
+            faqs = gerar_faq(texto, objetivo)
+            st.session_state.faqs_gerados = faqs
+            
+            # Atualizar o documento com as FAQs
+            doc.faq = faqs[:5000] if faqs else None
+            session.commit()
+            print("✅ FAQs atualizadas com sucesso!")
+            
     except Exception as e:
         print(f"❌ Erro ao salvar no banco: {e}")
-        st.error("Erro ao salvar no banco de dados. Por favor, tente novamente.")
+        st.error(f"Erro ao salvar no banco de dados: {str(e)}")
         session.rollback()
     finally:
         session.close()
-    
-    # Gerar FAQ
-    with st.spinner("❓ Gerando perguntas frequentes..."):
-        faqs = gerar_faq(texto, objetivo)
-        st.session_state.faqs_gerados = faqs
 
 # Função para processar objetivo digitado
 def handle_objetivo_input(objetivo_usuario):
