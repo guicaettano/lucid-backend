@@ -354,7 +354,14 @@ def gerar_resumo_e_faq(texto, objetivo):
             
             # Convert FAQ list to JSON string before saving
             doc.faq_list = faqs  # This will automatically convert to JSON
-            session.commit()
+            try:
+                session.commit()
+                print("✅ Documento salvo com sucesso!")
+            except Exception as e:
+                print(f"❌ Erro ao salvar no banco: {e}")
+                session.rollback()
+            finally:
+                session.close()
             logger.info("✅ FAQs atualizadas com sucesso")
             
     except Exception as e:

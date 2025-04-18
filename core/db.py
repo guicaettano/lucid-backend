@@ -4,6 +4,7 @@ from sqlalchemy import Column, String, Text, DateTime, create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from datetime import datetime
 import json
+import uuid
 
 # Configuração de logging
 logging.basicConfig(
@@ -38,32 +39,35 @@ class Documento(Base):
     def __repr__(self):
         return f"<Documento(id={self.id}, nome={self.nome_arquivo})>"
 
-def init_db():
-    """Inicializa o banco de dados"""
+def recriar_banco():
+    """Exclui e recria o banco de dados"""
+    if os.path.exists("lucid.db"):
+        os.remove("lucid.db")
+        print("🗑️ Banco de dados excluído.")
+    engine = create_engine("sqlite:///lucid.db")
+    Base.metadata.create_all(engine)
+    print("✅ Novo banco de dados criado.")
+    return sessionmaker(bind=engine)
+
+def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
+    session = Session()
     try:
-        logger.info("Iniciando criação do banco de dados...")
-        
-        # Recria o banco de dados
-        if os.path.exists("lucid.db"):
-            os.remove("lucid.db")
-            logger.info("🗑️ Banco de dados existente excluído")
-        
-        # Cria novo banco
-        engine = create_engine("sqlite:///lucid.db", echo=False)
-        Base.metadata.create_all(engine)
-        logger.info("✅ Novo banco de dados criado com sucesso")
-        
-        # Cria e retorna a Session
-        return sessionmaker(bind=engine)
-        
+        print(f"📄 Dados a serem salvos: nome_arquivo={nome_arquivo}, objetivo={objetivo}, resumo={resumo[:100]}, faq={faq[:100] if faq else None}")
+        doc = Documento(
+            id=str(uuid.uuid4()),
+            nome_arquivo=nome_arquivo,
+            objetivo=objetivo,
+            resumo=resumo[:5000],  # Limita o tamanho do resumo
+            faq=faq[:5000] if faq else None,
+        )
+        session.add(doc)
+        session.commit()
+        print("✅ Documento salvo com sucesso!")
     except Exception as e:
-        logger.error(f"❌ Erro ao criar banco de dados: {str(e)}")
-        raise
+        print(f"❌ Erro ao salvar documento: {e}")
+        session.rollback()
+    finally:
+        session.close()
 
 # Inicializa o banco de dados
-try:
-    Session = init_db()
-    logger.info("✅ Conexão com banco de dados estabelecida")
-except Exception as e:
-    logger.error(f"❌ Falha ao inicializar banco de dados: {str(e)}")
-    raise
+Session = recriar_banco()
