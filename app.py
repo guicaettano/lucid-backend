@@ -331,19 +331,19 @@ def gerar_resumo_e_faq(texto, objetivo):
     
     # Salvar no banco
     session = Session()
-    doc = Documento(
-        id=str(uuid.uuid4()),
-        nome_arquivo=st.session_state.file_name,
-        conteudo=texto,
-        objetivo=objetivo,
-        resumo=resumo
-    )
-    session.add(doc)
     try:
+        doc = Documento(
+            id=str(uuid.uuid4()),
+            nome_arquivo=st.session_state.file_name,
+            objetivo=objetivo,
+            resumo=resumo[:5000],  # Limita o tamanho do resumo
+        )
+        session.add(doc)
         session.commit()
         print("✅ Documento salvo com sucesso!")
     except Exception as e:
         print(f"❌ Erro ao salvar no banco: {e}")
+        st.error("Erro ao salvar no banco de dados. Por favor, tente novamente.")
         session.rollback()
     finally:
         session.close()
@@ -390,14 +390,8 @@ def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
             faq=faq[:5000] if faq else None,
         )
         session.add(doc)
-        try:
-            session.commit()
-            print("✅ Documento salvo com sucesso!")
-        except Exception as e:
-            print(f"❌ Erro ao salvar no banco: {e}")
-            session.rollback()
-        finally:
-            session.close()
+        session.commit()
+        print("✅ Documento salvo com sucesso!")
     except Exception as e:
         print(f"❌ Erro ao salvar documento: {e}")
         session.rollback()
