@@ -3,7 +3,8 @@ from PIL import Image
 import io
 
 # Inicializa o leitor com suporte ao português
-reader = easyocr.Reader(['pt'], gpu=False)
+reader = easyocr.Reader(["pt"], gpu=False)
+
 
 def extract_text_easyocr(image_path_or_bytes):
     if isinstance(image_path_or_bytes, bytes):
