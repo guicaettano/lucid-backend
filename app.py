@@ -9,6 +9,11 @@ import uuid
 from datetime import datetime
 import os
 from PIL import Image
+import logging
+
+# Configure logger
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 # Configuração da página
 st.set_page_config(page_title="Lucid", layout="centered")
@@ -320,49 +325,42 @@ def handle_sugestao_click(sugestao):
 
 # Função para gerar resumo e FAQ
 def gerar_resumo_e_faq(texto, objetivo):
-    # Gerar resumo primeiro
+    # Gerar resumo
     with st.spinner("🧠 Resumindo com inteligência..."):
         resumo = resumir_texto(texto, objetivo)
         st.session_state.resumo_gerado = resumo
     
-    # Adicionar ao histórico
-    timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
-    history_id = add_to_history(st.session_state.file_name, objetivo, timestamp)
-    
-    # Salvar no banco com tratamento de erro adequado
+    # Salvar no banco
     session = Session()
     try:
-        # Log para debug
-        print(f"💾 Salvando documento: {st.session_state.file_name}")
-        print(f"📝 Objetivo: {objetivo}")
-        print(f"📄 Tamanho do resumo: {len(resumo)} caracteres")
-        
+        # Create document
         doc = Documento(
             id=str(uuid.uuid4()),
             nome_arquivo=st.session_state.file_name,
             objetivo=objetivo,
-            resumo=resumo[:5000] if resumo else "",  # Previne None
-            faq=None,  # Será atualizado depois
-            chat=None
+            resumo=resumo[:5000] if resumo else "",
+            faq=None  # Will be updated later
         )
+        
+        # Save initial document
         session.add(doc)
         session.commit()
-        print("✅ Documento salvo com sucesso!")
+        logger.info("✅ Documento inicial salvo com sucesso")
         
-        # Gerar FAQ após salvar o documento
+        # Generate FAQ
         with st.spinner("❓ Gerando perguntas frequentes..."):
             faqs = gerar_faq(texto, objetivo)
             st.session_state.faqs_gerados = faqs
             
-            # Atualizar o documento com as FAQs
-            doc.faq = faqs[:5000] if faqs else None
+            # Convert FAQ list to JSON string before saving
+            doc.faq_list = faqs  # This will automatically convert to JSON
             session.commit()
-            print("✅ FAQs atualizadas com sucesso!")
+            logger.info("✅ FAQs atualizadas com sucesso")
             
     except Exception as e:
-        print(f"❌ Erro ao salvar no banco: {e}")
-        st.error(f"Erro ao salvar no banco de dados: {str(e)}")
+        logger.error(f"❌ Erro ao salvar no banco: {str(e)}")
         session.rollback()
+        st.error(f"Erro ao salvar no banco de dados. Por favor, tente novamente.")
     finally:
         session.close()
 
