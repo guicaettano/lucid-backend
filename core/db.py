@@ -21,7 +21,7 @@ class Documento(Base):
 if os.path.exists("lucid.db"):
     os.remove("lucid.db")
     print("🗑️ Banco de dados excluído.")
-engine = create_engine("sqlite:///lucid.db")
+engine = create_engine("sqlite:///dados.db")
 Base.metadata.create_all(engine)
 print("✅ Novo banco de dados criado.")
 Session = sessionmaker(bind=engine)
