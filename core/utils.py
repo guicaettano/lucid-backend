@@ -15,7 +15,7 @@ try:
     client = openai.OpenAI(
         api_key=os.getenv("MARITACA_API_KEY"),
         base_url=os.getenv("MARITACA_BASE_URL", "https://chat.maritaca.ai/api"),
-        http_client=httpx.Client(timeout=30.0)
+        http_client=httpx.Client(timeout=30.0),
     )
 except Exception as e:
     print(f"Error initializing OpenAI client: {e}")
@@ -30,7 +30,10 @@ def process_file(uploaded_file):
         text = "\n".join([page.extract_text() or "" for page in reader.pages])
         return text
 
-    elif file_type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+    elif (
+        file_type
+        == "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ):
         doc = Document(uploaded_file)
         return "\n".join([para.text for para in doc.paragraphs])
 
@@ -69,7 +72,10 @@ def feedback_suggestion(doc_type):
         "Material educacional": "Este documento parece ser material educacional. Você confirmaria isso?",
     }
 
-    return feedback_questions.get(doc_type, "Este documento não foi identificado corretamente. Você gostaria de fornecer mais detalhes?")
+    return feedback_questions.get(
+        doc_type,
+        "Este documento não foi identificado corretamente. Você gostaria de fornecer mais detalhes?",
+    )
 
 
 def sugerir_objetivo(texto):
@@ -77,5 +83,6 @@ def sugerir_objetivo(texto):
     return [
         "Resumir o conteúdo principal",
         "Extrair pontos-chave",
-        "Gerar perguntas frequentes"
+        "Gerar perguntas frequentes",
     ]
+
