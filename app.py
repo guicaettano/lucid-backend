@@ -16,22 +16,19 @@ st.set_page_config(page_title="Lucid", layout="centered")
 # CSS para estilização
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500;600&display=swap&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!@#$%^&*()');
     
-     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
-    
-    .main-title {
-        font-family: 'Inter', Helvetica, Arial, sans-serif;
-        font-weight: 900;
-        font-size: 3.8rem;
-        line-height: 1.1;
-        text-align: center;
+    html, body, [class*="css"] {
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+        background-color: #ffffff;
         color: #000000;
-        letter-spacing: -0.03em;
-        margin-bottom: 1.5rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
     }
 
     .hero-title {
-        font-family: 'Inter', Helvetica, Arial, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         text-align: center;
         font-size: 4.5rem !important;
         font-weight: 300;
@@ -40,7 +37,7 @@ st.markdown("""
     }
 
     .hero-subtitle {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         text-align: center;
         font-size: 1.5rem !important;
         font-weight: 300;
@@ -66,7 +63,7 @@ st.markdown("""
     }
 
     .section-title {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         font-size: 1.6rem;
         font-weight: 500;
         margin-top: 2rem;
@@ -78,7 +75,7 @@ st.markdown("""
     }
 
     .card {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
         background: #ffffff;
         color: #1d1d1f;
         padding: 1.2rem;

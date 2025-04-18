@@ -1,9 +1,8 @@
 from sqlalchemy import Column, String, Text, DateTime, create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base  # Atualizado aqui
 from datetime import datetime
-from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+Base = declarative_base()  # Agora usa a nova localização
 
 class Documento(Base):
     __tablename__ = "documentos"
@@ -16,7 +15,6 @@ class Documento(Base):
     chat = Column(Text, nullable=True)
     conteudo = Column(Text)  # ⬅️ Adicione essa linha
     timestamp = Column(DateTime, default=datetime.now)
-
 
 engine = create_engine("sqlite:///lucid.db")
 Base.metadata.create_all(engine)

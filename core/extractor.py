@@ -1,4 +1,3 @@
-
 from transformers import DonutProcessor, VisionEncoderDecoderModel
 from PIL import Image
 import docx2txt
@@ -18,27 +17,12 @@ def init_donut():
         model = VisionEncoderDecoderModel.from_pretrained("naver-clova-ix/donut-base")
 
 def extract_text_from_pdf(file_path):
-    """Extrai texto de arquivos PDF, usando OCR se necessário"""
+    """Extrai texto de arquivos PDF mantendo a estrutura"""
     doc = fitz.open(file_path)
     text = ''
     for page in doc:
         text += page.get_text()
-    
-    if text.strip():  # Se conseguiu extrair texto normal
-        return text
-    else:
-        # Se não extraiu nada, faz OCR página a página
-        print("PDF parece ser escaneado, aplicando OCR...")
-        init_donut()
-        ocr_text = ""
-        for page_number in range(len(doc)):
-            pix = doc[page_number].get_pixmap()
-            img_bytes = pix.tobytes("png")
-            ocr_result = extract_text_from_image(img_bytes)
-            if ocr_result:
-                ocr_text += ocr_result + "\n"
-        return ocr_text
-
+    return text
 
 def extract_text_from_docx(file_path):
     """Extrai texto de arquivos DOCX"""
