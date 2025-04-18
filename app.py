@@ -3,7 +3,8 @@ from utils import process_file
 from core.faq_generator import gerar_faq
 from core.summarizer import resumir_texto
 from core.chat_engine import responder_com_maritaca
-from core.db import Documento, Session
+
+# from core.db import Documento, Session
 from core.utils import sugerir_objetivo
 import uuid
 from datetime import datetime
@@ -345,46 +346,47 @@ def gerar_resumo_e_faq(texto, objetivo):
         resumo = resumir_texto(texto, objetivo)
         st.session_state.resumo_gerado = resumo
 
+    # Generate FAQ
+    with st.spinner("❓ Gerando perguntas frequentes..."):
+        faqs = gerar_faq(texto, objetivo)
+        st.session_state.faqs_gerados = faqs
+
     # Salvar no banco
-    session = Session()
-    try:
-        # Create document
-        doc = Documento(
-            id=str(uuid.uuid4()),
-            nome_arquivo=st.session_state.file_name,
-            objetivo=objetivo,
-            resumo=resumo[:5000] if resumo else "",
-            faq=None,  # Will be updated later
-        )
-
-        # Save initial document
-        session.add(doc)
-        session.commit()
-        logger.info("✅ Documento inicial salvo com sucesso")
-
-        # Generate FAQ
-        with st.spinner("❓ Gerando perguntas frequentes..."):
-            faqs = gerar_faq(texto, objetivo)
-            st.session_state.faqs_gerados = faqs
-
-            # Convert FAQ list to JSON string before saving
-            doc.faq_list = faqs  # This will automatically convert to JSON
-            try:
-                session.commit()
-                print("✅ Documento salvo com sucesso!")
-            except Exception as e:
-                print(f"❌ Erro ao salvar no banco: {e}")
-                session.rollback()
-            finally:
-                session.close()
-            logger.info("✅ FAQs atualizadas com sucesso")
-
-    except Exception as e:
-        logger.error(f"❌ Erro ao salvar no banco: {str(e)}")
-        session.rollback()
-        st.error(f"Erro ao salvar no banco de dados. Por favor, tente novamente.")
-    finally:
-        session.close()
+    # session = Session()
+    # try:
+    #     # Create document
+    #     doc = Documento(
+    #         id=str(uuid.uuid4()),
+    #         nome_arquivo=st.session_state.file_name,
+    #         objetivo=objetivo,
+    #         resumo=resumo[:5000] if resumo else "",
+    #         faq=None,  # Will be updated later
+    #     )
+    #
+    #     # Save initial document
+    #     session.add(doc)
+    #     session.commit()
+    #     logger.info("✅ Documento inicial salvo com sucesso")
+    #
+    #
+    #         # Convert FAQ list to JSON string before saving
+    #         doc.faq_list = faqs  # This will automatically convert to JSON
+    #         try:
+    #             session.commit()
+    #             print("✅ Documento salvo com sucesso!")
+    #         except Exception as e:
+    #             print(f"❌ Erro ao salvar no banco: {e}")
+    #             session.rollback()
+    #         finally:
+    #             session.close()
+    #         logger.info("✅ FAQs atualizadas com sucesso")
+    #
+    # except Exception as e:
+    #     logger.error(f"❌ Erro ao salvar no banco: {str(e)}")
+    #     session.rollback()
+    #     st.error(f"Erro ao salvar no banco de dados. Por favor, tente novamente.")
+    # finally:
+    #     session.close()
 
 
 # Função para processar objetivo digitado
@@ -417,26 +419,27 @@ def handle_new_message(message):
 
 
 def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
-    session = Session()
-    try:
-        print(
-            f"📄 Dados a serem salvos: nome_arquivo={nome_arquivo}, objetivo={objetivo}, resumo={resumo[:100]}, faq={faq[:100] if faq else None}"
-        )
-        doc = Documento(
-            id=str(uuid.uuid4()),
-            nome_arquivo=nome_arquivo,
-            objetivo=objetivo,
-            resumo=resumo[:5000],  # Limita o tamanho do resumo
-            faq=faq[:5000] if faq else None,
-        )
-        session.add(doc)
-        session.commit()
-        print("✅ Documento salvo com sucesso!")
-    except Exception as e:
-        print(f"❌ Erro ao salvar documento: {e}")
-        session.rollback()
-    finally:
-        session.close()
+    print("Salvar documento")
+    # session = Session()
+    # try:
+    #     print(
+    #         f"📄 Dados a serem salvos: nome_arquivo={nome_arquivo}, objetivo={objetivo}, resumo={resumo[:100]}, faq={faq[:100] if faq else None}"
+    #     )
+    #     doc = Documento(
+    #         id=str(uuid.uuid4()),
+    #         nome_arquivo=nome_arquivo,
+    #         objetivo=objetivo,
+    #         resumo=resumo[:5000],  # Limita o tamanho do resumo
+    #         faq=faq[:5000] if faq else None,
+    #     )
+    #     session.add(doc)
+    #     session.commit()
+    #     print("✅ Documento salvo com sucesso!")
+    # except Exception as e:
+    #     print(f"❌ Erro ao salvar documento: {e}")
+    #     session.rollback()
+    # finally:
+    #     session.close()
 
 
 # Cabeçalho
@@ -708,4 +711,3 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-
