@@ -339,8 +339,14 @@ def gerar_resumo_e_faq(texto, objetivo):
         resumo=resumo
     )
     session.add(doc)
-    session.commit()
-    session.close()
+    try:
+        session.commit()
+        print("✅ Documento salvo com sucesso!")
+    except Exception as e:
+        print(f"❌ Erro ao salvar no banco: {e}")
+        session.rollback()
+    finally:
+        session.close()
     
     # Gerar FAQ
     with st.spinner("❓ Gerando perguntas frequentes..."):
@@ -371,6 +377,32 @@ def handle_new_message(message):
             st.session_state.chat_history.append({"pergunta": message, "resposta": resposta})
         st.session_state.app_state = "chat"
         st.rerun()
+
+def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
+    session = Session()
+    try:
+        print(f"📄 Dados a serem salvos: nome_arquivo={nome_arquivo}, objetivo={objetivo}, resumo={resumo[:100]}, faq={faq[:100] if faq else None}")
+        doc = Documento(
+            id=str(uuid.uuid4()),
+            nome_arquivo=nome_arquivo,
+            objetivo=objetivo,
+            resumo=resumo[:5000],  # Limita o tamanho do resumo
+            faq=faq[:5000] if faq else None,
+        )
+        session.add(doc)
+        try:
+            session.commit()
+            print("✅ Documento salvo com sucesso!")
+        except Exception as e:
+            print(f"❌ Erro ao salvar no banco: {e}")
+            session.rollback()
+        finally:
+            session.close()
+    except Exception as e:
+        print(f"❌ Erro ao salvar documento: {e}")
+        session.rollback()
+    finally:
+        session.close()
 
 # Cabeçalho
 st.markdown("""
