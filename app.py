@@ -713,7 +713,7 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
             unsafe_allow_html=True,
         )
         submitted = st.form_submit_button("", type="primary")
-        message = st.query_params.get("message_input", [""])[0]  # Substituído o método
+        message = st.query_params.get("message_input", [""])[0]
         if submitted and message:
             # Criar um ID de sessão baseado no nome do arquivo atual
             session_id = f"doc_{st.session_state.file_name}"
