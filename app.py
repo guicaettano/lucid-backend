@@ -701,7 +701,6 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
             <div class="chat-container">
                 <input type="text" id="message_input" name="message_input" class="chat-input" placeholder="Escreva sua pergunta sobre o conteúdo...">
                 <button type="submit" class="chat-button">
-                    <span>Enviar</span>
                     <span class="chat-button-icon">⬆️</span>
                 </button>
             </div>
