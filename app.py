@@ -684,21 +684,12 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
                 )
                 st.rerun()
 
-    # Mostrar botão de feedback apenas após o uso do chat
+    # Mostrar notificação de feedback apenas após o uso do chat
     if st.session_state.chat_history:
         st.success("✅ Obrigado por usar o Lucid!")
-        st.write("Quer nos ajudar a melhorar? Leva menos de 1 minuto!")
-
-        # Botão para abrir o Forms diretamente
-        st.markdown(
-            """
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSed-Pc0evoX5aYlh2PwNoNQuuMy8R3hL00vvK9MmPxm1NkbNQ/viewform" target="_blank">
-                <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
-                    Dar Feedback 🚀
-                </button>
-            </a>
-            """,
-            unsafe_allow_html=True,
+        st.info(
+            "Quer nos ajudar a melhorar? [Clique aqui para dar seu feedback 🚀](https://docs.google.com/forms/d/e/1FAIpQLSed-Pc0evoX5aYlh2PwNoNQuuMy8R3hL00vvK9MmPxm1NkbNQ/viewform)",
+            icon="💡",
         )
 
     if st.button("⬅️ Voltar ao início", use_container_width=True):
