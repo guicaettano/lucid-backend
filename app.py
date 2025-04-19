@@ -687,9 +687,12 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
     # Mostrar notificação de feedback apenas após o uso do chat
     if st.session_state.chat_history:
         st.success("✅ Obrigado por usar o Lucid!")
-        st.info(
+        
+        # Exibir notificação com link para feedback
+        st.toast(
             "Quer nos ajudar a melhorar? [Clique aqui para dar seu feedback 🚀](https://docs.google.com/forms/d/e/1FAIpQLSed-Pc0evoX5aYlh2PwNoNQuuMy8R3hL00vvK9MmPxm1NkbNQ/viewform)",
             icon="💡",
+            duration=10,  # Duração da notificação em segundos
         )
 
     if st.button("⬅️ Voltar ao início", use_container_width=True):
