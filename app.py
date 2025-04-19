@@ -662,13 +662,54 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
 
     # Input de chat com form para evitar loop
     with st.form("chat_form", clear_on_submit=True):
-        message = st.text_input(
-            "",
-            placeholder="Escreva sua pergunta sobre o conteúdo...",
-            label_visibility="collapsed",
-            key="message_input",
+        st.markdown(
+            """
+            <style>
+            .chat-container {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .chat-input {
+                flex: 1;
+                height: 40px;
+                padding: 5px 10px;
+                font-size: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            .chat-button {
+                background-color: #007bff; /* Azul */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 15px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background-color 0.3s ease;
+            }
+            .chat-button:hover {
+                background-color: #0056b3; /* Azul mais escuro */
+            }
+            .chat-button-icon {
+                font-size: 1.2rem;
+                margin-left: 5px;
+            }
+            </style>
+            <div class="chat-container">
+                <input type="text" id="message_input" name="message_input" class="chat-input" placeholder="Escreva sua pergunta sobre o conteúdo...">
+                <button type="submit" class="chat-button">
+                    <span>Enviar</span>
+                    <span class="chat-button-icon">⬆️</span>
+                </button>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
         submitted = st.form_submit_button("", type="primary")
+        message = st.experimental_get_query_params().get("message_input", [""])[0]
         if submitted and message:
             # Criar um ID de sessão baseado no nome do arquivo atual
             session_id = f"doc_{st.session_state.file_name}"
@@ -688,11 +729,10 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
     if st.session_state.chat_history:
         st.success("✅ Obrigado por usar o Lucid!")
         
-        # Exibir notificação com link para feedback usando st.toast
-        st.toast(
-            "Quer nos ajudar a melhorar? 🚀 [Clique aqui para dar seu feedback](https://docs.google.com/forms/d/e/1FAIpQLSed-Pc0evoX5aYlh2PwNoNQuuMy8R3hL00vvK9MmPxm1NkbNQ/viewform)",
+        # Exibir notificação com link para feedback
+        st.info(
+            "Quer nos ajudar a melhorar? [Clique aqui para dar seu feedback 🚀](https://docs.google.com/forms/d/e/1FAIpQLSed-Pc0evoX5aYlh2PwNoNQuuMy8R3hL00vvK9MmPxm1NkbNQ/viewform)",
             icon="💡",
-            duration=10,  # Duração da notificação em segundos
         )
 
     if st.button("⬅️ Voltar ao início", use_container_width=True):
