@@ -691,9 +691,13 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
                 transition: background-color 0.3s ease;
                 margin: 0; /* Remove margens extras */
                 box-shadow: none; /* Remove sombras extras */
+                outline: none; /* Remove borda de foco */
             }
             .chat-button:hover {
                 background-color: #0056b3; /* Azul mais escuro */
+            }
+            .chat-button:focus {
+                outline: none; /* Remove borda de foco ao clicar */
             }
             .chat-button-icon {
                 font-size: 1.2rem;
