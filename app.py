@@ -683,7 +683,7 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
                 color: white;
                 border: none;
                 border-radius: 5px;
-                padding: 10px 15px;
+                padding: 10px;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
@@ -695,7 +695,6 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
             }
             .chat-button-icon {
                 font-size: 1.2rem;
-                margin-left: 5px;
             }
             </style>
             <div class="chat-container">
@@ -708,7 +707,7 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
             unsafe_allow_html=True,
         )
         submitted = st.form_submit_button("", type="primary")
-        message = st.experimental_get_query_params().get("message_input", [""])[0]
+        message = st.query_params.get("message_input", [""])[0]  # Substituído o método
         if submitted and message:
             # Criar um ID de sessão baseado no nome do arquivo atual
             session_id = f"doc_{st.session_state.file_name}"
