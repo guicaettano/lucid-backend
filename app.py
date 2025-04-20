@@ -696,17 +696,11 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
             .chat-button:hover {
                 background-color: #0056b3; /* Azul mais escuro */
             }
-            .chat-button:focus {
-                outline: none; /* Remove borda de foco ao clicar */
-            }
-            .chat-button-icon {
-                font-size: 1.2rem;
-            }
             </style>
             <div class="chat-container">
                 <input type="text" id="message_input" name="message_input" class="chat-input" placeholder="Escreva sua pergunta sobre o conteúdo...">
                 <button type="submit" class="chat-button">
-                    <span class="chat-button-icon">⬆️</span>
+                    Enviar
                 </button>
             </div>
             """,
