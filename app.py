@@ -706,9 +706,11 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
             """,
             unsafe_allow_html=True,
         )
-        submitted = st.form_submit_button("", type="primary")
-        message = st.query_params.get("message_input", [""])[0]
-        if submitted and message:
+        # Captura o valor do input
+        message = st.text_input("Escreva sua pergunta sobre o conteúdo...", key="message_input", label_visibility="collapsed")
+        submitted = st.form_submit_button("Enviar")  # Botão de envio
+
+        if submitted and message.strip():  # Verifica se o botão foi clicado e se há mensagem
             # Criar um ID de sessão baseado no nome do arquivo atual
             session_id = f"doc_{st.session_state.file_name}"
             with st.spinner("💡 Gerando resposta..."):
@@ -722,6 +724,8 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
                     {"pergunta": message, "resposta": resposta}
                 )
                 st.rerun()
+        elif submitted and not message.strip():
+            st.error("Por favor, escreva uma mensagem antes de enviar.")
 
     # Mostrar notificação de feedback apenas após o uso do chat
     if st.session_state.chat_history:
