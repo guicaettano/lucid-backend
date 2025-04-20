@@ -649,57 +649,27 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
         unsafe_allow_html=True,
     )
 
-    # Input de chat com form para evitar loop
-    with st.form("chat_form", clear_on_submit=True):
+    # Mostrar histórico do chat
+    for chat in st.session_state.chat_history:
         st.markdown(
-            """
-            <style>
-            .chat-container {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            .chat-input {
-                flex: 1;
-                height: 40px;
-                padding: 5px 10px;
-                font-size: 1rem;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-            .chat-button {
-                background-color: #007bff; /* Azul */
-                color: white;
-                border: none;
-                border-radius: 5px;
-                padding: 10px;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: background-color 0.3s ease;
-                margin: 0; /* Remove margens extras */
-                box-shadow: none; /* Remove sombras extras */
-                outline: none; /* Remove borda de foco */
-            }
-            .chat-button:hover {
-                background-color: #0056b3; /* Azul mais escuro */
-            }
-            </style>
-            <div class="chat-container">
-                <input type="text" id="message_input" name="message_input" class="chat-input" placeholder="Escreva sua pergunta sobre o conteúdo...">
-                <button type="submit" class="chat-button">
-                    Enviar
-                </button>
-            </div>
-            """,
+            f"<div class='card'><b>Você:</b> {chat['pergunta']}</div>",
             unsafe_allow_html=True,
         )
-        # Captura o valor do input
-        message = st.text_input("Escreva sua pergunta sobre o conteúdo...", key="message_input", label_visibility="collapsed")
-        submitted = st.form_submit_button("Enviar")  # Botão de envio
+        st.markdown(
+            f"<div class='card'><b>Lucid:</b> {chat['resposta']}</div>",
+            unsafe_allow_html=True,
+        )
 
-        if submitted and message.strip():  # Verifica se o botão foi clicado e se há mensagem
+    # Input de chat com form para evitar loop
+    with st.form("chat_form", clear_on_submit=True):
+        message = st.text_input(
+            "",
+            placeholder="Escreva sua pergunta sobre o conteúdo...",
+            label_visibility="collapsed",
+            key="message_input",
+        )
+        submitted = st.form_submit_button("", type="primary")
+        if submitted and message:
             # Criar um ID de sessão baseado no nome do arquivo atual
             session_id = f"doc_{st.session_state.file_name}"
             with st.spinner("💡 Gerando resposta..."):
@@ -713,18 +683,18 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
                     {"pergunta": message, "resposta": resposta}
                 )
                 st.rerun()
-        elif submitted and not message.strip():
-            st.error("Por favor, escreva uma mensagem antes de enviar.")
 
-    # Mostrar notificação de feedback apenas após o uso do chat
+    # Mostrar botão de feedback apenas após o uso do chat
     if st.session_state.chat_history:
         st.success("✅ Obrigado por usar o Lucid!")
-        
-        # Exibir notificação com link para feedback
-        st.info(
-            "Quer nos ajudar a melhorar? [Clique aqui para dar seu feedback 🚀](https://docs.google.com/forms/d/e/1FAIpQLSed-Pc0evoX5aYlh2PwNoNQuuMy8R3hL00vvK9MmPxm1NkbNQ/viewform)",
-            icon="💡",
-        )
+        st.write("Quer nos ajudar a melhorar? Leva menos de 1 minuto!")
+
+        # Botão para abrir o Forms
+        if st.button("Dar Feedback"):
+            st.markdown(
+                "[Clique aqui para abrir o formulário de feedback 🚀](https://docs.google.com/forms/d/e/1FAIpQLSed-Pc0evoX5aYlh2PwNoNQuuMy8R3hL00vvK9MmPxm1NkbNQ/viewform)",
+                unsafe_allow_html=True,
+            )
 
     if st.button("⬅️ Voltar ao início", use_container_width=True):
         change_state("inicio")
