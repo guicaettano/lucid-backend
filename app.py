@@ -649,17 +649,6 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
         unsafe_allow_html=True,
     )
 
-    # Mostrar histórico do chat
-    for chat in st.session_state.chat_history:
-        st.markdown(
-            f"<div class='card'><b>Você:</b> {chat['pergunta']}</div>",
-            unsafe_allow_html=True,
-        )
-        st.markdown(
-            f"<div class='card'><b>Lucid:</b> {chat['resposta']}</div>",
-            unsafe_allow_html=True,
-        )
-
     # Input de chat com form para evitar loop
     with st.form("chat_form", clear_on_submit=True):
         st.markdown(
