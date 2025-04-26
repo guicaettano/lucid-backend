@@ -443,13 +443,11 @@ def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
 
 
 # Cabeçalho com logo
-try:
-    image = Image.open("lucid_logo.jpg")  # Certifique-se de que o caminho está correto
-    st.image(image, use_column_width=True)
-except FileNotFoundError:
-    st.error("Arquivo 'lucid_logo.png' não encontrado no caminho especificado.")
-except Exception as e:
-    st.error(f"Erro ao carregar a imagem: {e}")
+st.markdown("""
+    <div style="text-align: center; padding: 20px; background-color: #f5f5f7; border-radius: 10px; margin-bottom: 20px;">
+        <h1 style="color: #424245; font-size: 3em; margin: 0;">LUCID</h1>
+    </div>
+""", unsafe_allow_html=True)
 
 st.markdown(
     """
