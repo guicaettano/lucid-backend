@@ -452,8 +452,8 @@ except Exception as e:
 
 st.markdown(
     """
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-    <div class="hero-subtitle" style="font-family: 'Poppins', sans-serif;">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <div class="hero-subtitle" style="font-family: 'Inter', sans-serif;">
         Uma tela. Um comando. Insights infinitos
     </div>
     """,
@@ -464,8 +464,8 @@ st.markdown(
 if st.session_state.app_state == "inicio":
     st.markdown(
     """
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-    <div class="choice-title" style="font-family: 'Poppins', sans-serif;">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <div class="choice-title" style="font-family: 'Inter', sans-serif;">
         Como você deseja inserir seu conteúdo?
     </div>
     """,
