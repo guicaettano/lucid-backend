@@ -442,7 +442,7 @@ def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
 
 try:
     image = Image.open("lucid_logo.jpg")
-    st.image(image, use_container_width=True)
+    st.image(image, width=300)
 except FileNotFoundError:
     st.error("Arquivo 'lucid_logo.jpg' não encontrado no caminho especificado.")
 except Exception as e:
