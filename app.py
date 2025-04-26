@@ -442,20 +442,12 @@ def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
 
 try:
     image = Image.open("lucid_logo.jpg")
-    st.image(image, width=300)
+    st.image(image, width=300, use_column_width=True)
 except FileNotFoundError:
     st.error("Arquivo 'lucid_logo.jpg' não encontrado no caminho especificado.")
 except Exception as e:
     st.error(f"Erro ao carregar a imagem: {e}")
-    
-st.markdown(
-    """
-    <div style="display: flex; justify-content: center;">
-        <img src="lucid_logo.jpg" width="300"/>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+
 
 
 st.markdown(
