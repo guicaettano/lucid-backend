@@ -17,7 +17,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configuração da página
-st.set_page_config(page_title="Lucid", layout="centered")
+st.set_page_config(
+    page_title="Lucid",
+    page_icon="icon.png",  # Caminho para seu ícone
+    layout="centered"
+)
 
 # CSS para estilização
 st.markdown(
