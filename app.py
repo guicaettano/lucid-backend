@@ -460,13 +460,18 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
 # Lógica principal baseada no estado atual
 if st.session_state.app_state == "inicio":
     st.markdown(
-        "<div class='choice-title'> Como você deseja inserir seu conteúdo?</div>",
-        unsafe_allow_html=True,
-    )
+    """
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <div class="choice-title" style="font-family: 'Poppins', sans-serif;">
+        Como você deseja inserir seu conteúdo?
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 
     col1, col2 = st.columns(2)
 
