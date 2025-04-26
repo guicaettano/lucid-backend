@@ -442,17 +442,14 @@ def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
     #     session.close()
 
 
-# Temporariamente removido até resolver o problema da imagem
-# try:
-#     image = Image.open("lucid_logo.jpg")
-#     st.image(image, use_column_width=True)
-# except FileNotFoundError:
-#     st.error("Arquivo 'lucid_logo.jpg' não encontrado no caminho especificado.")
-# except Exception as e:
-#     st.error(f"Erro ao carregar a imagem: {e}")
+try:
+    image = Image.open("lucid_logo.jpg")
+    st.image(image, use_column_width=True)
+except FileNotFoundError:
+    st.error("Arquivo 'lucid_logo.jpg' não encontrado no caminho especificado.")
+except Exception as e:
+    st.error(f"Erro ao carregar a imagem: {e}")
 
-# Em vez disso, podemos usar um título temporário
-st.title("Lucid")
 
 st.markdown(
     """
