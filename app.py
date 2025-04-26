@@ -444,7 +444,7 @@ def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
 
 # Cabeçalho com logo
 try:
-    image = Image.open("lucid_logo.png")  # Certifique-se de que o caminho está correto
+    image = Image.open("lucid_logo.jpg")  # Certifique-se de que o caminho está correto
     st.image(image, use_container_width=True)
 except FileNotFoundError:
     st.error("Arquivo 'lucid_logo.png' não encontrado no caminho especificado.")
