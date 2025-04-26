@@ -442,6 +442,22 @@ def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
     #     session.close()
 
 
+# Cabeçalho com logo
+try:
+    image = Image.open("lucid_logo.png")  # Certifique-se de que o caminho está correto
+    st.image(image, use_container_width=True)
+except FileNotFoundError:
+    st.error("Arquivo 'lucid_logo.png' não encontrado no caminho especificado.")
+except Exception as e:
+    st.error(f"Erro ao carregar a imagem: {e}")
+
+st.markdown(
+    """
+    <div class="hero-subtitle">Uma tela. Um comando. Insights infinitos</div>
+    """,
+    unsafe_allow_html=True,
+)
+
 # Cabeçalho
 st.markdown(
     """
