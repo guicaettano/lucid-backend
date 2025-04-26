@@ -7,8 +7,6 @@ from core.chat_engine import responder_com_maritaca
 # from core.db import Documento, Session
 from core.utils import sugerir_objetivo
 import uuid
-from datetime import datetime
-import os
 from PIL import Image
 import logging
 
@@ -444,7 +442,7 @@ def salvar_documento(nome_arquivo, objetivo, resumo, faq=None):
 
 try:
     image = Image.open("lucid_logo.jpg")
-    st.image(image, use_column_width=True)
+    st.image(image, use_container_width=True)
 except FileNotFoundError:
     st.error("Arquivo 'lucid_logo.jpg' não encontrado no caminho especificado.")
 except Exception as e:
@@ -458,16 +456,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Cabeçalho
-st.markdown(
-    """
-    <div class="hero-container">
-        <div class="hero-title">Lucid</div>
-        <div class="hero-subtitle">Uma tela. Um comando. Insights infinitos</div>
-    </div>
-""",
-    unsafe_allow_html=True,
-)
 
 # Lógica principal baseada no estado atual
 if st.session_state.app_state == "inicio":
