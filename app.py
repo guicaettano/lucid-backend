@@ -447,6 +447,15 @@ except FileNotFoundError:
     st.error("Arquivo 'lucid_logo.jpg' não encontrado no caminho especificado.")
 except Exception as e:
     st.error(f"Erro ao carregar a imagem: {e}")
+    
+st.markdown(
+    """
+    <div style="display: flex; justify-content: center;">
+        <img src="lucid_logo.jpg" width="300"/>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 
 st.markdown(
