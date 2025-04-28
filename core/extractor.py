@@ -3,7 +3,6 @@ from PIL import Image
 import docx2txt
 import fitz  # PyMuPDF
 import os
-import torch
 import io
 
 # Inicializa o modelo Donut uma vez (singleton)
@@ -109,4 +108,3 @@ def extract_text(file_path_or_bytes, file_extension=None):
         return extract_text_from_image(file_path_or_bytes)
     else:
         raise ValueError(f"Formato não suportado: {ext}")
-

@@ -81,4 +81,3 @@ if __name__ == "__main__":
             "Qual foi o desempenho de vendas?",
         )
     )
-
