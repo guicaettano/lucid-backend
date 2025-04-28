@@ -649,6 +649,26 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
             unsafe_allow_html=True,
         )
 
+        # Botão para gerar resumo novamente
+        if st.button("🔄 Gerar de novo", key="btn_gerar_resumo_novamente", help="Gerar o resumo mais uma vez", use_container_width=False):
+            st.experimental_rerun()
+
+        # CSS para estilizar o botão
+        st.markdown(
+            """
+            <style>
+            div[data-testid="stButton"][key="btn_gerar_resumo_novamente"] button {
+                padding: 2px 10px !important;
+                font-size: 0.75rem !important;
+                border-radius: 6px !important;
+                min-width: 0 !important;
+                width: auto !important;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+
     # Se temos FAQs gerados, exibir
     if st.session_state.faqs_gerados:
         st.markdown(

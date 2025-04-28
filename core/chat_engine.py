@@ -47,7 +47,7 @@ def responder_com_maritaca(texto, objetivo, pergunta, session_id=None):
         # Construir o prompt com contexto e histórico
         prompt = (
             f"Você é um assistente que leu um documento com o seguinte objetivo: '{objetivo}'.\n"
-            f"Com base no documento, objetivo e histórico da conversa, responda de forma clara e concisa:\n\n"
+            f"Com base no documento, objetivo e histórico da conversa, responda de forma clara e detalhada:\n\n"
             f"Documento:\n{texto[:6000]}\n\n"
             f"{historico_texto}\n"
             f"Pergunta atual: {pergunta}"
