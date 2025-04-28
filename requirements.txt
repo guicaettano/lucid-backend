@@ -8,6 +8,5 @@ python-dotenv==1.0.0
 requests==2.31.0
 numpy==1.26.0
 openai==1.1.0
-easyocr==1.7.1
+easyocr==1.7.2
 sqlalchemy==2.0.27
-together==1.5.5
