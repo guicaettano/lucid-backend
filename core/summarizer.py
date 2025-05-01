@@ -24,9 +24,10 @@ def resumir_texto(texto, objetivo):
         )
         return response.choices[0].message.content
     except Exception as e:
-        print(f"Error generating summary: {e}")
+        import traceback
+        traceback.print_exc()
         return (
-            "Desculpe, ocorreu um erro ao gerar o resumo. Por favor, tente novamente."
+            f"Desculpe, ocorreu um erro ao gerar o resumo: {e}"
         )
 
 if __name__ == "__main__":
