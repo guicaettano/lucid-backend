@@ -20,7 +20,7 @@ def resumir_texto(texto, objetivo):
 
         response = client.chat.completions.create(
             model="meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
-            prompt=prompt
+            messages=prompt
         )
         return response.choices[0].text
     except Exception as e:
