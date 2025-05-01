@@ -6,7 +6,7 @@ from together import Together
 load_dotenv()
 
 try:
-    client = Together(api_key=os.getenv("TOGETHER_API_KEY", "bd403cf4cea85ed2304bb0e62881379af0fa2aba31b48947d02c86951d86a32c"))
+    client = Together(api_key=os.getenv("TOGETHER_API_KEY", "tgp_v1_27_E4RHmsTzYm2Iz7Cvp8ZYWD3IRcnCMLlt9GML27Vs"))
 except Exception as e:
     print(f"Error initializing Together client: {e}")
     client = None
