@@ -5,7 +5,8 @@ from together import Together
 load_dotenv()
 os.environ["TOGETHER_API_KEY"] = "bd403cf4cea85ed2304bb0e62881379af0fa2aba31b48947d02c86951d86a32c"
 
-client = Together()
+# Initialize the Together client
+client = Together(api_key=os.environ["TOGETHER_API_KEY"])
 
 def resumir_texto(texto, objetivo):
     if not client:
@@ -18,11 +19,15 @@ def resumir_texto(texto, objetivo):
             f"Documento:\n{texto[:8000]}"
         )
 
-        response = client.chat.completions.create(
+        # Using the correct API method based on Together AI's current SDK
+        response = client.complete(
             model="meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
-            messages=[{"role": "user", "content": prompt}]
+            prompt=prompt,
+            temperature=0.7,
         )
-        return response.choices[0].message.content
+        
+        # Extract the generated text from the response
+        return response["output"]["choices"][0]["text"]
     except Exception as e:
         import traceback
         traceback.print_exc()
