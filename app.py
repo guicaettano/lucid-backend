@@ -2,7 +2,7 @@ import streamlit as st
 from utils import process_file
 from core.faq_generator import gerar_faq
 from core.summarizer import resumir_texto
-from core.chat_engine import responder_com_maritaca
+from core.chat_engine import responder_com_llama
 
 # from core.db import Documento, Session
 from core.utils import sugerir_objetivo
@@ -407,7 +407,7 @@ def handle_new_message(message):
             # Criar um ID de sessão baseado no nome do arquivo atual
             session_id = f"doc_{st.session_state.file_name}"
 
-            resposta = responder_com_maritaca(
+            resposta = responder_com_llama(
                 st.session_state.texto_extraido,
                 st.session_state.objetivo_final,
                 message,
@@ -709,7 +709,7 @@ elif st.session_state.app_state == "resumo" or st.session_state.app_state == "ch
             # Criar um ID de sessão baseado no nome do arquivo atual
             session_id = f"doc_{st.session_state.file_name}"
             with st.spinner("💡 Gerando resposta..."):
-                resposta = responder_com_maritaca(
+                resposta = responder_com_llama(
                     st.session_state.texto_extraido,
                     st.session_state.objetivo_final,
                     message,
