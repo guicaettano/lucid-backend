@@ -20,15 +20,14 @@ def resumir_texto(texto, objetivo):
 
         response = client.chat.completions.create(
             model="meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
-            messages=prompt
+            messages=[{"role": "user", "content": prompt}]
         )
-        return response.choices[0].text
+        return response.choices[0].message.content
     except Exception as e:
         print(f"Error generating summary: {e}")
         return (
             "Desculpe, ocorreu um erro ao gerar o resumo. Por favor, tente novamente."
         )
-
 
 if __name__ == "__main__":
     texto_teste = "Este é um relatório contendo dados de desempenho trimestral, indicadores de vendas e análise de mercado."
