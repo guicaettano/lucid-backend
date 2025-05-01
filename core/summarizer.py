@@ -1,11 +1,11 @@
-
+import os
 from dotenv import load_dotenv
 from together import Together
 
 load_dotenv()
-api_key="bd403cf4cea85ed2304bb0e62881379af0fa2aba31b48947d02c86951d86a32c"
+os.environ["TOGETHER_API_KEY"] = "bd403cf4cea85ed2304bb0e62881379af0fa2aba31b48947d02c86951d86a32c"
 
-client = Together(api_key=api_key)
+client = Together()
 
 def resumir_texto(texto, objetivo):
     if not client:
